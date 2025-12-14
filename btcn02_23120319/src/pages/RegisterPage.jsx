@@ -1,18 +1,21 @@
 import { useAuth } from "@/context/AuthContext";
 import { useForm } from "react-hook-form";
+import registerSchema from "@/lib/register.schema";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 
 function RegisterPage() {
     const { login } = useAuth();
 
     const form = useForm({
-        resolver: zodResolver(),
+        resolver: zodResolver(registerSchema),
         defaultValues: {
-            email: "",
             username: "",
-            name: "",
+            email: "",
             password: "",
             confirmPassword: "",
+            phone: "",
+            dob: "",
         },
     });
 }
