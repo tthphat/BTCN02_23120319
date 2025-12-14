@@ -1,18 +1,9 @@
-import { useAuth } from "@/context/AuthContext";
-import { useNavigate, Link } from "react-router-dom";
+import { useAuth } from "@/contexts/AuthContext";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { authSchema } from "@/lib/auth.schema";
-import {
-    Form,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage,
-    FormControl,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom";
+import LoginForm from "@/components/auth/LoginForm";
 
 function LoginPage() {
     const { login } = useAuth();
@@ -25,6 +16,20 @@ function LoginPage() {
             password: "",
         },
     });
+
+    const onSubmit = (data) => {
+        try {
+            console.log("Login with:", data);
+            login(data);
+            navigate("/");
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    return <LoginForm form={form} onSubmit={onSubmit} />;
 }
+
+export default LoginPage;
 
 
