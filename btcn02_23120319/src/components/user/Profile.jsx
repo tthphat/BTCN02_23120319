@@ -6,6 +6,25 @@ import { useAuth } from "@/contexts/AuthContext";
 export default function Profile() {
     const { user, logout } = useAuth();
 
+    const getUser = async () => {
+        try {
+            const response = await fetch(`${API_URL}/users/profile`, {
+                headers: {
+                    "x-app-token": APP_TOKEN,
+                    "Authorization": `Bearer ${user.token}`,
+                },
+            });
+
+            if (!response.ok) {
+                throw new Error("Failed to fetch user profile");
+            }
+            const data = await response.json();
+            console.log(data);
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
     return (
         <div className="flex justify-center items-center py-10">
             <Card className="w-md lg:w-xl ">
