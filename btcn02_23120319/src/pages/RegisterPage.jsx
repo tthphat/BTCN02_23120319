@@ -18,4 +18,8 @@ function RegisterPage() {
             dob: "",
         },
     });
+
+    return (
+        <RegisterForm form={form} onSubmit={onSubmit} />
+    );
 }
