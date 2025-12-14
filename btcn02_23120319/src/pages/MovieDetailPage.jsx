@@ -42,9 +42,41 @@ function MovieDetailPage() {
     if (!movie) return <div className="text-center py-10">Movie not found</div>;
 
     return (
-        <div className="container mx-auto py-8">
-            <h1 className="text-3xl font-bold">Movie Detail Page</h1>
-            <p className="mt-4">Movie ID: {id}</p>
+        <div className="container mx-auto py-8 text-foreground">
+            <div className="grid grid-cols-1 md:grid-cols-[300px_1fr] gap-8">
+                {/* Left Column: Poster & Actions */}
+                <div className="flex flex-col gap-0 rounded-sm overflow-hidden">
+                    <div className="relative group aspect-[2/3] w-full">
+                        <img
+                            src={movie.image}
+                            alt={movie.title}
+                            className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity"
+                        />
+
+                        {/* Follow Button */}
+                        <div className="absolute top-4 left-4">
+                            <Button size="sm" variant="secondary" className="gap-2 bg-black/60 hover:bg-black/80 text-white border-none backdrop-blur-sm cursor-pointer">
+                                <Heart className="w-4 h-4" />
+                                Yêu thích
+                            </Button>
+                        </div>
+
+                        {/* Play Icon (Center) */}
+                        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                            <div className="w-16 h-16 rounded-full border-2 border-white/80 flex items-center justify-center bg-black/30 backdrop-blur-sm">
+                                <Play className="w-8 h-8 text-white fill-white ml-1" />
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Watch Button */}
+                    <Button className="w-full rounded-t-none bg-red-700 hover:bg-red-800 text-white font-bold text-lg py-6 rounded-none">
+                        XEM PHIM
+                    </Button>
+                </div>
+
+
+            </div>
         </div>
     );
 }
