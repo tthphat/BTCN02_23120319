@@ -37,46 +37,38 @@ function Best5Movie() {
     useEffect(() => { getBest5Movie() }, []);
 
     return (
-        <div className="w-full h-full row-start-1 px-50 relative group">
-            <Carousel
-                opts={{
-                    align: "start",
-                }}
-                className="w-full h-full flex justify-center items-center"
-            >
+        <div className="w-full h-full row-start-1 px-30 relative">
+            <Carousel className="w-full h-full relative">
                 <CarouselContent className="w-full h-full">
-                    {movies.length > 0 && movies.map((movie) => (
-                        <CarouselItem key={movie.id} className="w-[50px] h-full">
-                            <div className="h-full">
-                                <Card className="w-full h-full relative overflow-hidden group border-0 rounded-lg shadow-lg p-0">
-                                    <div className="w-full h-full relative">
-                                        <img
-                                            src={movie.image}
-                                            alt={movie.title}
-                                            className="absolute top-0 left-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                                        />
-                                        <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/90 to-transparent pointer-events-none" />
-                                        <div className="absolute bottom-0 left-0 w-full p-4 text-white">
-                                            <h3 className="text-lg font-bold line-clamp-1 mb-1" title={movie.title}>
-                                                {movie.title}
-                                            </h3>
-                                            <div className="flex items-center justify-between text-sm font-medium">
-                                                <div className="flex items-center gap-1.5 opacity-90">
-                                                    <Calendar className="w-3.5 h-3.5" />
-                                                    <span>{movie.year}</span>
-                                                </div>
-                                                <div className="flex items-center gap-1 text-yellow-500 font-bold bg-black/20 px-2 py-0.5 rounded-full backdrop-blur-sm">
-                                                    <Star className="w-3.5 h-3.5 fill-current" />
-                                                    <span>{movie.rate}</span>
-                                                </div>
-                                            </div>
-                                        </div>
+                    {movies.map(movie => (
+                        <CarouselItem
+                            key={movie.id}
+                            className="basis-full h-full flex justify-center items-center"
+                        >
+                            <Card className="w-full max-w-xs aspect-[2/3] relative overflow-hidden border-0 rounded-xl shadow-lg">
+                                <img
+                                    src={movie.image}
+                                    alt={movie.title}
+                                    className="absolute inset-0 w-full h-full object-cover"
+                                />
+
+                                <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/90 to-transparent" />
+
+                                <div className="absolute bottom-0 left-0 w-full p-6 text-white">
+                                    <h3 className="text-2xl font-bold mb-2">
+                                        {movie.title}
+                                    </h3>
+
+                                    <div className="flex items-center gap-4 text-sm opacity-90">
+                                        <span>Rate: {movie.rate}</span>
+                                        <span>Year: {movie.year}</span>
                                     </div>
-                                </Card>
-                            </div>
+                                </div>
+                            </Card>
                         </CarouselItem>
                     ))}
                 </CarouselContent>
+
                 <CarouselPrevious />
                 <CarouselNext />
             </Carousel>
