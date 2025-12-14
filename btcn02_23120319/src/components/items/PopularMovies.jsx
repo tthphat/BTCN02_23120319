@@ -18,18 +18,23 @@ function PopularMovies() {
 
     const getPopularMovies = async () => {
         try {
-            const response = await fetch(`${API_URL}/movies/most-popular?page=1&limit=30`, {
-                headers: {
-                    "x-app-token": APP_TOKEN,
-                },
-            });
+            // Fetch page 1, 2, 3 sau đó gộp lại thành 1 mảng mới đủ 30 phim
+            const promises = [1, 2, 3].map(page =>
+                fetch(`${API_URL}/movies/most-popular?page=${page}&limit=10`, {
+                    headers: {
+                        "x-app-token": APP_TOKEN,
+                    },
+                }).then(res => {
+                    if (!res.ok) throw new Error(`Failed to fetch popular movies page ${page}`);
+                    return res.json();
+                })
+            );
 
-            if (!response.ok) {
-                throw new Error("Failed to fetch popular movies");
-            }
-            const data = await response.json();
-            setMovies(data.data);
-            console.log(data);
+            const results = await Promise.all(promises);
+            // Gộp mảng
+            const allMovies = results.flatMap(data => data.data);
+            setMovies(allMovies);
+            console.log("Fetched movies:", allMovies);
         } catch (error) {
             console.error(error);
         }
@@ -38,7 +43,7 @@ function PopularMovies() {
     useEffect(() => { getPopularMovies() }, []);
 
     return (
-        <div className="w-full h-full row-start-2 px-30 relative">
+        <div className="w-full h-full row-start-2 px-16 relative overflow-hidden">
             <Carousel
                 opts={{
                     align: "start",
