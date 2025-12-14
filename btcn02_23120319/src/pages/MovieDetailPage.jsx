@@ -118,7 +118,7 @@ function MovieDetailPage() {
                                     ))}
                                 </div>
                                 <span className="text-xs text-muted-foreground">
-                                    (Score: {movie.ratings.rottenTomatoes}/100 %)
+                                    (Score: {movie.ratings.rottenTomatoes}/100%)
                                 </span>
                             </div>
                         </div>

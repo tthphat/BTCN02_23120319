@@ -43,13 +43,14 @@ function PopularMovies() {
     useEffect(() => { getPopularMovies() }, []);
 
     return (
-        <div className="w-full h-full row-start-2 px-16 relative overflow-hidden">
+        <div className="w-full h-full row-start-2 px-16 relative overflow-hidden flex flex-col">
+            <h2 className="text-2xl font-bold border-l-4 border-lime-400 pl-4 mb-6">Most Popular</h2>
             <Carousel
                 opts={{
                     align: "start",
                     slidesToScroll: 3,
                 }}
-                className="w-full h-full relative"
+                className="w-full flex-1 relative"
             >
                 <CarouselContent className="w-full h-full">
                     {movies.map(movie => (
