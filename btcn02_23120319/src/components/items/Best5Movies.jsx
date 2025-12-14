@@ -64,8 +64,10 @@ function Best5Movie() {
                                     </h3>
 
                                     <div className="flex items-center gap-4 text-sm opacity-90">
-                                        <span>Rate: {movie.rate}</span>
-                                        <span>Year: {movie.year}</span>
+                                        <span className="flex items-center gap-1 bg-yellow-500/20 px-1.5 py-0.5 rounded text-yellow-400">
+                                            ★ {movie.rate}
+                                        </span>
+                                        <span>{movie.year}</span>
                                     </div>
                                 </div>
                             </Card>
