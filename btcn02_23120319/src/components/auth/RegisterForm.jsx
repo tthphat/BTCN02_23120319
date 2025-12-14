@@ -1,4 +1,3 @@
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -10,7 +9,7 @@ import {
 import { Navigate } from "react-router-dom";
 
 
-function RegisterForm({ form, onSubmit, showAlert }) {
+function RegisterForm({ form, onSubmit }) {
     const navigate = Navigate();
 
     return (
@@ -23,6 +22,96 @@ function RegisterForm({ form, onSubmit, showAlert }) {
                     </p>
                 </div>
                 <form onSubmit={form.handleSubmit(onSubmit)}>
+                    <FieldGroup>
+                        <Controller
+                            name="username"
+                            control={form.control}
+                            render={({ field, fieldState }) => (
+                                <Field data-invalid={fieldState.invalid}>
+                                    <FieldLabel>Username</FieldLabel>
+                                    <Input {...field} placeholder="username" />
+                                    {fieldState.error && (
+                                        <FieldError errors={[fieldState.error]} />
+                                    )}
+                                </Field>
+                            )}
+                        />
+
+                        <Controller
+                            name="email"
+                            control={form.control}
+                            render={({ field, fieldState }) => (
+                                <Field data-invalid={fieldState.invalid}>
+                                    <FieldLabel>Email</FieldLabel>
+                                    <Input {...field} placeholder="example@gmail.com" />
+                                    {fieldState.error && (
+                                        <FieldError errors={[fieldState.error]} />
+                                    )}
+                                </Field>
+                            )}
+                        />
+
+                        <Controller
+                            name="phone"
+                            control={form.control}
+                            render={({ field, fieldState }) => (
+                                <Field data-invalid={fieldState.invalid}>
+                                    <FieldLabel>Phone</FieldLabel>
+                                    <Input {...field} placeholder="phone" />
+                                    {fieldState.error && (
+                                        <FieldError errors={[fieldState.error]} />
+                                    )}
+                                </Field>
+                            )}
+                        />
+
+                        <Controller
+                            name="dob"
+                            control={form.control}
+                            render={({ field, fieldState }) => (
+                                <Field data-invalid={fieldState.invalid}>
+                                    <FieldLabel>Date of Birth</FieldLabel>
+                                    <Input {...field} type="date" placeholder="dob" />
+                                    {fieldState.error && (
+                                        <FieldError errors={[fieldState.error]} />
+                                    )}
+                                </Field>
+                            )}
+                        />
+
+                        <Controller
+                            name="password"
+                            control={form.control}
+                            render={({ field, fieldState }) => (
+                                <Field data-invalid={fieldState.invalid}>
+                                    <FieldLabel>Password</FieldLabel>
+                                    <Input {...field} type="password" placeholder="password" />
+                                    {fieldState.error && (
+                                        <FieldError errors={[fieldState.error]} />
+                                    )}
+                                </Field>
+                            )}
+                        />
+
+                        <Controller
+                            name="confirmPassword"
+                            control={form.control}
+                            render={({ field, fieldState }) => (
+                                <Field data-invalid={fieldState.invalid}>
+                                    <FieldLabel>Confirm Password</FieldLabel>
+                                    <Input
+                                        {...field}
+                                        type="password"
+                                        placeholder="confirm password"
+                                    />
+                                    {fieldState.error && (
+                                        <FieldError errors={[fieldState.error]} />
+                                    )}
+                                </Field>
+                            )}
+                        />
+
+                    </FieldGroup>
 
                     <Button
                         type="submit"
