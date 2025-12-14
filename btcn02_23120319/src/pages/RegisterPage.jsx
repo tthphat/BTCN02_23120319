@@ -6,7 +6,7 @@ import RegisterForm from "@/components/auth/RegisterForm";
 
 
 function RegisterPage() {
-    const { login } = useAuth();
+    const { register } = useAuth();
 
     const form = useForm({
         resolver: zodResolver(registerSchema),
@@ -20,9 +20,11 @@ function RegisterPage() {
         },
     });
 
-    const onSubmit = (data) => {
+    const onSubmit = async (data) => {
         try {
-            console.log("Register with:", data);
+            const { confirmPassword, ...registerData } = data;
+            console.log("Register with:", registerData);
+            await register(registerData);
         } catch (error) {
             console.log(error);
         }
