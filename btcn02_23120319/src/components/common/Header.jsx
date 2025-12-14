@@ -1,3 +1,5 @@
+import { DarkModeToggle } from "../theme/ThemeToggle"
+
 function Header() {
     return (
         <header>
@@ -9,7 +11,7 @@ function Header() {
                     <h1 className="h1">Movies info</h1>
                 </div>
                 <div>
-
+                    <DarkModeToggle />
                 </div>
             </div>
         </header>
