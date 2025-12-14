@@ -1,6 +1,8 @@
 import { DarkModeToggle } from "../theme/ThemeToggle"
 import { CircleUserRound } from "lucide-react"
 import { useAuth } from "@/contexts/AuthContext"
+import { Link } from "react-router-dom"
+
 
 function Header() {
     const { user } = useAuth();
@@ -14,7 +16,11 @@ function Header() {
                     <h1 className="h1 text-2xl font-semibold">Movies info</h1>
                 </div>
                 <div className="flex items-center gap-2">
-                    <CircleUserRound size={28} className={`${user && "text-green-500"} cursor-pointer`} />
+                    <CircleUserRound
+                        size={28}
+                        className={`cursor-pointer ${user ? "text-green-500" : ""}`}
+                        onClick={() => navigate(user ? "/user" : "/login")}
+                    />
                     <DarkModeToggle />
                 </div>
             </div>
