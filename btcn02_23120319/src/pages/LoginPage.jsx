@@ -1,6 +1,8 @@
 import { useAuth } from "@/context/AuthContext";
 import { useNavigate, Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { authSchema } from "@/lib/auth.schema";
 import {
     Form,
     FormField,
@@ -17,9 +19,9 @@ function LoginPage() {
     const navigate = useNavigate();
 
     const form = useForm({
-        resolver: zodResolver(),
+        resolver: zodResolver(authSchema),
         defaultValues: {
-            email: "",
+            username: "",
             password: "",
         },
     });
