@@ -29,6 +29,29 @@ export function AuthProvider({ children }) {
             console.log(error);
         }
     }
+
+    const register = async (user) => {
+        try {
+            const response = await fetch(`${API_URL}/register`, {
+                method: "POST",
+                headers: {
+                    "x-app-token": APP_TOKEN,
+                },
+                body: JSON.stringify(user),
+            });
+
+            if (!response.ok) {
+                throw new Error("Username or password is incorrect");
+            }
+
+            const data = await response.json();
+            setUser(data);
+            localStorage.setItem("user", JSON.stringify(data));
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     const logout = () => {
         setUser(null);
         localStorage.removeItem("user");
@@ -36,11 +59,11 @@ export function AuthProvider({ children }) {
 
     return (
         <>
-            <AuthContext.Provider value={{ user, login, logout }}>
+            <AuthContext.Provider value={{ user, login, register, logout }}>
                 {children}
             </AuthContext.Provider>
         </>
     );
 }
 
-export const useAuth = () => useContext(AuthContext);
+export const useAuth = () => useContext(AuthContext);   
