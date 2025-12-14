@@ -10,9 +10,12 @@ function Best5Movie() {
             method: "GET",
             headers: {
                 "x-app-token": APP_TOKEN,
-                "Content-Type": "application/json",
             },
         });
+
+        if (!response.ok) {
+            throw new Error("Failed to fetch best 5 movie");
+        }
         const data = await response.json();
         return data;
     }

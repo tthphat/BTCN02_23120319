@@ -1,7 +1,9 @@
 function Home() {
     return (
-        <div>
-            <h1>Home</h1>
+        <div className="grid grid-rows-[2fr_1fr_1fr] gap-2">
+            <div>Top</div>
+            <div>Center</div>
+            <div>Bottom</div>
         </div>
     );
 }
