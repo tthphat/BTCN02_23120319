@@ -27,7 +27,7 @@ export function DarkModeToggle() {
                 onCheckedChange={toggleTheme}
             />
             {dark ? (
-                <Moon className="h-5 w-5 text-white" />
+                <Moon className="h-5 w-5 text-gray-300" />
             ) : (
                 <Sun className="h-5 w-5 text-gray-500" />
             )}
