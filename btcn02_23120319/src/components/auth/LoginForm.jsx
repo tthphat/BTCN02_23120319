@@ -15,18 +15,12 @@ function LoginForm({ form, onSubmit }) {
 
     return (
         <div className="w-screen h-screen flex justify-center items-center">
-            <div className="sm:w-md sm:min-w-sm flex flex-col gap-8 p-6 border border-[#5293D6] rounded-lg shadow">
-                <div className="heading flex justify-between items-center text-xl font-semibold mb-6">
-                    <h2>Login</h2>
-                    <h2
-                        className="text-[#5293D6] hover:text-blue-500 cursor-pointer"
-                        onClick={() => navigate("/register")}
-                    >
-                        Sign up
-                    </h2>
+            <div className="sm:w-sm flex flex-col gap-8 p-6 border border-[#5293D6] rounded-lg shadow">
+                <div className="heading flex justify-center items-center font-semibold">
+                    <h1 className="text-2xl">Login</h1>
                 </div>
                 <Form {...form}>
-                    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+                    <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-8">
                         <FormField
                             name="username"
                             control={form.control}
@@ -65,6 +59,15 @@ function LoginForm({ form, onSubmit }) {
                         </Button>
                     </form>
                 </Form>
+                <div className="flex items-center text-sm gap-2">
+                    <p>Don't have an account?</p>
+                    <h2
+                        className="text-[#5293D6] hover:text-blue-700 cursor-pointer transition"
+                        onClick={() => navigate("/register")}
+                    >
+                        Sign up
+                    </h2>
+                </div>
             </div>
         </div>
     );
