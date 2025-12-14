@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import {
     Carousel,
     CarouselContent,
@@ -8,7 +8,6 @@ import {
     CarouselNext,
     CarouselPrevious,
 } from "@/components/ui/carousel";
-import { Star, Calendar } from "lucide-react";
 
 const API_URL = import.meta.env.VITE_API_URL
 const APP_TOKEN = import.meta.env.VITE_APP_TOKEN
