@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import {
     Carousel,
@@ -14,6 +15,7 @@ const APP_TOKEN = import.meta.env.VITE_APP_TOKEN
 
 function Best5Movie() {
     const [movies, setMovies] = useState([]);
+    const navigate = useNavigate();
 
     const getBest5Movie = async () => {
         try {
@@ -45,7 +47,10 @@ function Best5Movie() {
                             key={movie.id}
                             className="basis-full h-full flex justify-center items-center"
                         >
-                            <Card className="w-full max-w-xs aspect-[2/3] relative overflow-hidden border-0 rounded-xl shadow-lg">
+                            <Card
+                                onClick={() => navigate(`/movies/${movie.id}`)}
+                                className="w-full max-w-xs aspect-[2/3] relative overflow-hidden border-0 rounded-xl shadow-lg cursor-pointer"
+                            >
                                 <img
                                     src={movie.image}
                                     alt={movie.title}
