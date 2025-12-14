@@ -3,7 +3,7 @@ import { DarkModeToggle } from "../theme/ThemeToggle"
 function Header() {
     return (
         <header>
-            <div className="w-full flex justify-between items-center px-5 py-3">
+            <div className="w-full flex justify-between items-center px-5 py-3 bg-[var(--header-background)] text-[var(--header-foreground)]">
                 <div>
                     <h1 className="h1">23120319</h1>
                 </div>
