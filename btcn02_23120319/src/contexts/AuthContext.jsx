@@ -7,27 +7,29 @@ const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
     const [user, setUser] = useState(null);
+    const [token, setToken] = useState(null);
 
     const login = async (user) => {
-        try {
-            const response = await fetch(`${API_URL}/users/login`, {
-                method: "POST",
-                headers: {
-                    "x-app-token": APP_TOKEN,
-                },
-                body: JSON.stringify(user),
-            });
+        const response = await fetch(`${API_URL}/users/login`, {
+            method: "POST",
+            headers: {
+                "x-app-token": APP_TOKEN,
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(user),
+        });
 
-            if (!response.ok) {
-                throw new Error("Username or password is incorrect");
-            }
+        const data = await response.json();
 
-            const data = await response.json();
-            setUser(data);
-            localStorage.setItem("user", JSON.stringify(data));
-        } catch (error) {
-            console.log(error);
+        if (!response.ok) {
+            throw new Error(response.message || "Login failed");
         }
+
+        setUser(data.user);
+        setToken(data.token);
+
+        localStorage.setItem("user", JSON.stringify(data.user));
+        localStorage.setItem("token", data.token);
     }
 
     const register = async (user) => {
