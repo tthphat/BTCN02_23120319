@@ -75,7 +75,21 @@ function MovieDetailPage() {
                     </Button>
                 </div>
 
+                {/* Right Column: Information */}
+                <div className="flex flex-col gap-4">
+                    {/* Title */}
+                    <div>
+                        <h1 className="text-4xl font-bold text-lime-400 mb-1">{movie.title}</h1>
+                        <h2 className="text-xl text-muted-foreground">{movie.full_title} - {movie.countries}</h2>
+                    </div>
 
+                    {/* Description */}
+                    <p className="text-muted-foreground mt-2">
+                        {movie.plot_full}
+                    </p>
+
+
+                </div>
             </div>
         </div>
     );
