@@ -1,7 +1,8 @@
-import { useAuth } from "@/context/AuthContext";
+import { useAuth } from "@/contexts/AuthContext";
 import { useForm } from "react-hook-form";
-import registerSchema from "@/lib/register.schema";
+import { registerSchema } from "@/lib/register.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
+import RegisterForm from "@/components/auth/RegisterForm";
 
 
 function RegisterPage() {
@@ -19,7 +20,17 @@ function RegisterPage() {
         },
     });
 
+    const onSubmit = (data) => {
+        try {
+            console.log("Register with:", data);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
     return (
         <RegisterForm form={form} onSubmit={onSubmit} />
     );
 }
+
+export default RegisterPage;
