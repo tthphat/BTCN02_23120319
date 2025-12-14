@@ -51,6 +51,7 @@
 
   --header-background: #E7D2D1;
   --header-foreground: #000000;
+  --navbar-background: #DBEAFE;
 }
 
 @theme inline {
@@ -129,6 +130,7 @@
 
   --header-background: #000000;
   --header-foreground: #E7D2D1;
+  --navbar-background: #104E64;
 }
 
 @layer base {
