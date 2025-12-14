@@ -10,7 +10,7 @@ export function AuthProvider({ children }) {
 
     const login = async (user) => {
         try {
-            const response = await fetch(`${API_URL}/login`, {
+            const response = await fetch(`${API_URL}/users/login`, {
                 method: "POST",
                 headers: {
                     "x-app-token": APP_TOKEN,
@@ -32,7 +32,7 @@ export function AuthProvider({ children }) {
 
     const register = async (user) => {
         try {
-            const response = await fetch(`${API_URL}/register`, {
+            const response = await fetch(`${API_URL}/users/register`, {
                 method: "POST",
                 headers: {
                     "x-app-token": APP_TOKEN,
