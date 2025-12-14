@@ -1,11 +1,11 @@
 import { DarkModeToggle } from "../theme/ThemeToggle"
 import { CircleUserRound } from "lucide-react"
 import { useAuth } from "@/contexts/AuthContext"
-import { Link } from "react-router-dom"
-
+import { useNavigate } from "react-router-dom"
 
 function Header() {
     const { user } = useAuth();
+    const navigate = useNavigate();
     return (
         <header>
             <div className="w-full flex justify-between items-center px-5 py-3 bg-[var(--header-background)] text-[var(--header-foreground)]">
