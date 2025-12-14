@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
+import { Sun, Moon } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
 
 export function DarkModeToggle() {
-    const [dark, setDark] = useState(false);
+    const [dark, setDark] = useState(false); // true:Dark, false:Light
 
     // load theme từ localStorage
     useEffect(() => {
@@ -25,7 +26,11 @@ export function DarkModeToggle() {
                 checked={dark}
                 onCheckedChange={toggleTheme}
             />
-
+            {dark ? (
+                <Moon className="h-5 w-5 text-white" />
+            ) : (
+                <Sun className="h-5 w-5 text-gray-500" />
+            )}
         </div>
     )
 }
