@@ -14,8 +14,8 @@ function LoginForm({ form, onSubmit }) {
     const navigate = useNavigate();
 
     return (
-        <div className="w-screen h-screen flex justify-center items-center">
-            <div className="sm:w-sm flex flex-col gap-8 p-6 border border-[#5293D6] rounded-lg shadow">
+        <div className="w-screen h-screen flex justify-center items-center bg-background">
+            <div className="sm:w-sm flex flex-col gap-8 p-6 border border-[#5293D6] rounded-lg shadow bg-card text-card-foreground">
                 <div className="heading flex justify-center items-center font-semibold">
                     <h1 className="text-2xl">Login</h1>
                 </div>

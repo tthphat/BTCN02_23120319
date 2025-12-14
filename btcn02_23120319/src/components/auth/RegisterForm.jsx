@@ -15,7 +15,7 @@ function RegisterForm({ form, onSubmit }) {
 
     return (
         <div className="w-full min-h-screen flex justify-center items-center relative py-10">
-            <div className="sm:w-md sm:min-w-sm p-6 flex flex-col gap-6 rounded-lg shadow border border-[#5293D6]">
+            <div className="sm:w-md sm:min-w-sm p-6 flex flex-col gap-6 rounded-lg shadow border border-[#5293D6] bg-card text-card-foreground">
                 <div className="heading flex justify-center items-center mb-3">
                     <h2 className="font-semibold text-2xl">Sign up</h2>
                 </div>
