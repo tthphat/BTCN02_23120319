@@ -33,25 +33,26 @@ export function AuthProvider({ children }) {
     }
 
     const register = async (user) => {
-        try {
-            const response = await fetch(`${API_URL}/users/register`, {
-                method: "POST",
-                headers: {
-                    "x-app-token": APP_TOKEN,
-                },
-                body: JSON.stringify(user),
-            });
+        const response = await fetch(`${API_URL}/users/register`, {
+            method: "POST",
+            headers: {
+                "x-app-token": APP_TOKEN,
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(user),
+        });
 
-            if (!response.ok) {
-                throw new Error("Username or password is incorrect");
-            }
+        const data = await response.json();
 
-            const data = await response.json();
-            setUser(data);
-            localStorage.setItem("user", JSON.stringify(data));
-        } catch (error) {
-            console.log(error);
+        if (!response.ok) {
+            throw new Error(data.message || "Register failed");
         }
+
+        setUser(data.user);
+        setToken(data.token);
+
+        localStorage.setItem("user", JSON.stringify(data.user));
+        localStorage.setItem("token", data.token);
     }
 
     const logout = () => {
