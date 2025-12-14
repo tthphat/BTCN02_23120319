@@ -17,13 +17,16 @@ function LoginPage() {
         },
     });
 
-    const onSubmit = (data) => {
+    const onSubmit = async (data) => {
         try {
             console.log("Login with:", data);
-            login(data);
+            await login(data);
             navigate("/");
         } catch (error) {
             console.log(error);
+            form.setError("username", {
+                message: error || "Network error",
+            });
         }
     };
 

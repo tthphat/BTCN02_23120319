@@ -20,7 +20,7 @@ function LoginForm({ form, onSubmit }) {
                     <h1 className="text-2xl">Login</h1>
                 </div>
                 <Form {...form}>
-                    <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-8">
+                    <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-6">
                         <FormField
                             name="username"
                             control={form.control}
