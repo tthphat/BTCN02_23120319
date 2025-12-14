@@ -1,45 +1,31 @@
-"use client"
-
-import { useEffect, useState } from "react"
-import { Moon, Sun } from "lucide-react"
-import { Toggle } from "@/components/ui/toggle"
-
-const THEME_KEY = "theme" // 'dark' | 'light'
+import { useState, useEffect } from "react";
+import { Switch } from "@/components/ui/switch";
 
 export function DarkModeToggle() {
-    const [dark, setDark] = useState(false)
+    const [dark, setDark] = useState(false);
 
-    // Load theme từ localStorage
+    // load theme từ localStorage
     useEffect(() => {
-        const savedTheme = localStorage.getItem(THEME_KEY)
-        if (savedTheme === "dark") {
+        const saved = localStorage.getItem("theme")
+        if (saved === "dark") {
             setDark(true)
             document.documentElement.classList.add("dark")
         }
     }, [])
 
-    // Sync state → DOM + localStorage
-    useEffect(() => {
-        const html = document.documentElement
-
-        if (dark) {
-            html.classList.add("dark")
-            localStorage.setItem(THEME_KEY, "dark")
-        } else {
-            html.classList.remove("dark")
-            localStorage.setItem(THEME_KEY, "light")
-        }
-    }, [dark])
+    const toggleTheme = (checked) => {
+        setDark(checked)
+        document.documentElement.classList.toggle("dark", checked)
+        localStorage.setItem("theme", checked ? "dark" : "light")
+    }
 
     return (
-        <Toggle
-            pressed={dark}
-            onPressedChange={setDark}
-            aria-label="Toggle dark mode"
-            variant="outline"
-            size="sm"
-        >
-            {dark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
-        </Toggle>
+        <div className="flex items-center gap-3">
+            <Switch
+                checked={dark}
+                onCheckedChange={toggleTheme}
+            />
+
+        </div>
     )
 }
