@@ -16,6 +16,27 @@ function PopularMovies() {
     const [movies, setMovies] = useState([]);
     const navigate = useNavigate();
 
+    const getPopularMovies = async () => {
+        try {
+            const response = await fetch(`${API_URL}/movies/most-popular?page=1&limit=30`, {
+                headers: {
+                    "x-app-token": APP_TOKEN,
+                },
+            });
+
+            if (!response.ok) {
+                throw new Error("Failed to fetch popular movies");
+            }
+            const data = await response.json();
+            setMovies(data.data);
+            console.log(data);
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    useEffect(() => { getPopularMovies() }, []);
+
     return (
         <div className="w-full h-full row-start-2 px-30 relative">
             <Carousel
