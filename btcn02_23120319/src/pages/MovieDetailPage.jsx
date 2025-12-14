@@ -118,7 +118,7 @@ function MovieDetailPage() {
                                     ))}
                                 </div>
                                 <span className="text-xs text-muted-foreground">
-                                    (Score: {movie.rate}/10)
+                                    (Score: {movie.ratings.rottenTomatoes}/100 %)
                                 </span>
                             </div>
                         </div>
@@ -134,6 +134,29 @@ function MovieDetailPage() {
                                 <span>{movie.year}</span>
                             </div>
                         </div>
+
+                        {/* Cast & Crew */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
+                            {movie.directors?.length > 0 && (
+                                <div>
+                                    <span className="text-muted-foreground text-sm block mb-1">Director:</span>
+                                    <div className="flex flex-wrap gap-2">
+                                        {movie.directors.map(director => (
+                                            <span key={director.id} className="font-medium">{director.name}</span>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
+                            {movie.actors?.length > 0 && (
+                                <div>
+                                    <span className="text-muted-foreground text-sm block mb-1">Cast:</span>
+                                    <div className="text-sm">
+                                        {movie.actors.slice(0, 5).map(actor => actor.name).join(", ")}
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+
                     </div>
                 </div>
             </div>
