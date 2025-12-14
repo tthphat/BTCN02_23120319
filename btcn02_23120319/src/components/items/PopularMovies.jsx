@@ -71,7 +71,8 @@ function PopularMovies() {
                                 {/* Nền đen khi hover */}
                                 <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors duration-300" />
 
-                                <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
+                                {/* Background gradient đen từ bên dưới */}
+                                <div className="absolute inset-x-0 bottom-0 h-full bg-gradient-to-t from-black/90 to-transparent" />
 
                                 {/* Nút Play khi hover */}
                                 <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 scale-75 group-hover:scale-100">
@@ -93,6 +94,23 @@ function PopularMovies() {
                                         </span>
                                         <span>{movie.year}</span>
                                         <span className="border border-white/30 px-1.5 py-0.5 rounded text-[10px]">HD</span>
+                                    </div>
+
+                                    {/* Thông tin thêm khi hover */}
+                                    <div className="opacity-0 max-h-0 group-hover:opacity-100 group-hover:max-h-20 transition-all duration-300 overflow-hidden">
+                                        <div className="flex flex-wrap gap-1 mt-2">
+                                            {movie.genres?.slice(0, 2).map((genre, idx) => (
+                                                <span key={idx} className="text-[10px] bg-white/20 px-2 py-0.5 rounded-full">
+                                                    {genre}
+                                                </span>
+                                            ))}
+                                            {movie.genres?.length > 2 && (
+                                                <span className="text-[10px] bg-white/20 px-2 py-0.5 rounded-full">+{movie.genres.length - 2}</span>
+                                            )}
+                                        </div>
+                                        <div className="mt-2">
+                                            <span className="text-[10px] bg-white/20 px-2 py-0.5 rounded-full">Revenue: {movie.box_office_revenue}</span>
+                                        </div>
                                     </div>
                                 </div>
                             </Card>
