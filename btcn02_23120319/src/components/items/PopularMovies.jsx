@@ -56,28 +56,43 @@ function PopularMovies() {
                     {movies.map(movie => (
                         <CarouselItem
                             key={movie.id}
-                            className="basis-1/3 h-full flex justify-center items-center"
+                            className="basis-1/3 h-full flex justify-center items-center py-4"
                         >
                             <Card
                                 onClick={() => navigate(`/movies/${movie.id}`)}
-                                className="w-full max-w-[300px] aspect-[2/3] relative overflow-hidden border-0 rounded-xl shadow-lg cursor-pointer"
+                                className="w-full max-w-[300px] aspect-[2/3] relative overflow-hidden border-0 rounded-xl shadow-lg cursor-pointer group transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:z-10"
                             >
                                 <img
                                     src={movie.image}
                                     alt={movie.title}
-                                    className="absolute inset-0 w-full h-full object-cover"
+                                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                                 />
 
-                                <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/90 to-transparent" />
+                                {/* Nền đen khi hover */}
+                                <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors duration-300" />
 
-                                <div className="absolute bottom-0 left-0 w-full p-6 text-white">
-                                    <h3 className="text-2xl font-bold mb-2">
+                                <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
+
+                                {/* Nút Play khi hover */}
+                                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 scale-75 group-hover:scale-100">
+                                    <div className="w-12 h-12 rounded-full bg-lime-400 text-black flex items-center justify-center shadow-lg">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6 ml-0.5">
+                                            <path fillRule="evenodd" d="M4.5 5.653c0-1.426 1.529-2.33 2.779-1.643l11.54 6.348c1.295.712 1.295 2.573 0 3.285L7.28 19.991c-1.25.687-2.779-.217-2.779-1.643V5.653z" clipRule="evenodd" />
+                                        </svg>
+                                    </div>
+                                </div>
+
+                                <div className="absolute bottom-0 left-0 w-full p-4 text-white transform transition-transform duration-300 group-hover:-translate-y-2">
+                                    <h3 className="text-xl font-bold mb-1 line-clamp-2 leading-tight">
                                         {movie.title}
                                     </h3>
 
-                                    <div className="flex items-center gap-4 text-sm opacity-90">
-                                        <span>Rate: {movie.rate}</span>
-                                        <span>Year: {movie.year}</span>
+                                    <div className="flex items-center gap-3 text-xs opacity-90 font-medium mb-2">
+                                        <span className="flex items-center gap-1 bg-yellow-500/20 px-1.5 py-0.5 rounded text-yellow-400">
+                                            ★ {movie.rate}
+                                        </span>
+                                        <span>{movie.year}</span>
+                                        <span className="border border-white/30 px-1.5 py-0.5 rounded text-[10px]">HD</span>
                                     </div>
                                 </div>
                             </Card>
