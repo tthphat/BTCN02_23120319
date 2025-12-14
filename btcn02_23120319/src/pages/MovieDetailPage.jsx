@@ -88,7 +88,53 @@ function MovieDetailPage() {
                         {movie.plot_full}
                     </p>
 
+                    {/* Genres */}
+                    <div className="flex flex-wrap gap-2">
+                        {movie.genres?.map((genre, index) => (
+                            <span key={index} className="px-3 py-1 bg-secondary text-secondary-foreground text-xs rounded-full">
+                                {genre}
+                            </span>
+                        ))}
+                    </div>
 
+                    <div className="border-t border-border my-4" />
+
+                    {/* Rating & Stats */}
+                    <div className="flex flex-col gap-4">
+
+                        {/* Stars Section */}
+                        <div className="flex items-center gap-4">
+                            <div className="w-16 h-16 rounded-full border-4 border-lime-400 flex items-center justify-center text-lime-400 font-bold text-lg bg-black/20">
+                                {movie.rate ? (movie.rate * 10).toFixed(0) : 0}%
+                            </div>
+
+                            <div className="flex flex-col gap-1">
+                                <div className="flex text-yellow-500">
+                                    {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((star) => (
+                                        <Star
+                                            key={star}
+                                            className={`w-4 h-4 ${star <= Math.round(movie.rate) ? 'fill-current' : 'text-gray-600'}`}
+                                        />
+                                    ))}
+                                </div>
+                                <span className="text-xs text-muted-foreground">
+                                    (Score: {movie.rate}/10)
+                                </span>
+                            </div>
+                        </div>
+
+                        {/* Meta Info */}
+                        <div className="flex flex-wrap items-center gap-6 text-sm mt-2">
+                            <div className="flex items-center gap-2">
+                                <span className="text-muted-foreground">Runtime:</span>
+                                <span>{movie.runtime}</span>
+                            </div>
+                            <div className="flex items-center gap-2">
+                                <Calendar className="w-4 h-4 text-lime-400" />
+                                <span>{movie.year}</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
