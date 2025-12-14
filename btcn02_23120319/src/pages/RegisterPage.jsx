@@ -27,6 +27,9 @@ function RegisterPage() {
             await register(registerData);
         } catch (error) {
             console.log(error);
+            form.setError("username", {
+                message: error || "Register failed",
+            });
         }
     };
 
