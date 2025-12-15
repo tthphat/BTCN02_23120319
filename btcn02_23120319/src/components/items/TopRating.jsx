@@ -9,6 +9,8 @@ import {
     CarouselPrevious,
 } from "@/components/ui/carousel";
 
+const API_URL = import.meta.env.VITE_API_URL
+const APP_TOKEN = import.meta.env.VITE_APP_TOKEN
 
 function TopRating() {
     const [movies, setMovies] = useState([]);
@@ -32,16 +34,16 @@ function TopRating() {
             // Gộp mảng
             const allMovies = results.flatMap(data => data.data);
             setMovies(allMovies);
-            console.log("Fetched movies:", allMovies);
+            console.log("Fetched top rating movies:", allMovies);
         } catch (error) {
             console.error(error);
         }
     }
 
-    useEffect(() => { getPopularMovies() }, []);
+    useEffect(() => { getTopRatingMovies() }, []);
 
     return (
-        <div className="w-full h-full row-start-2 px-16 relative overflow-hidden flex flex-col">
+        <div className="w-full h-full row-start-3 px-16 relative overflow-hidden flex flex-col">
             <h2 className="text-2xl font-bold border-l-4 border-lime-400 pl-4 mb-6">Top Rating</h2>
             <Carousel
                 opts={{
@@ -90,7 +92,6 @@ function TopRating() {
                                         <span className="flex items-center gap-1 bg-yellow-500/20 px-1.5 py-0.5 rounded text-yellow-400">
                                             ★ {movie.rate}
                                         </span>
-                                        <span>{movie.rank}</span>
                                         <span className="border border-white/30 px-1.5 py-0.5 rounded text-[10px]">HD</span>
                                     </div>
 
@@ -107,7 +108,7 @@ function TopRating() {
                                             )}
                                         </div>
                                         <div className="mt-2">
-                                            <span className="text-[10px] bg-white/20 px-2 py-0.5 rounded-full">Revenue: {movie.box_office_revenue}</span>
+                                            <span className="text-[10px] bg-white/20 px-2 py-0.5 rounded-full">Rank: {movie.rank}</span>
                                         </div>
                                     </div>
 
@@ -124,3 +125,5 @@ function TopRating() {
         </div>
     )
 }
+
+export default TopRating

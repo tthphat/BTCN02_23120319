@@ -34,7 +34,7 @@ function PopularMovies() {
             // Gộp mảng
             const allMovies = results.flatMap(data => data.data);
             setMovies(allMovies);
-            console.log("Fetched movies:", allMovies);
+            console.log("Fetched popular movies:", allMovies);
         } catch (error) {
             console.error(error);
         }
