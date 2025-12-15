@@ -1,5 +1,6 @@
 import { PaginationSection } from "@/components/common/PaginationSection";
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom"
 
 function PersonKnowFor({ know_for = [] }) {
     const [page, setPage] = useState(1);
@@ -59,6 +60,11 @@ function PersonKnowFor({ know_for = [] }) {
                                     <span className="font-semibold text-lg">{movie.title}</span>
                                     <span className="text-md text-muted-foreground">({movie.year})</span>
                                 </div>
+                                <Link to={`/movie/${movie.id}`}>
+                                    <div className="bg-red-100 text-red-700 px-2 py-1 rounded text-sm font-bold flex items-center gap-1">
+                                        <span className="text-xs text-red-500">Details</span>
+                                    </div>
+                                </Link>
                             </div>
 
                             {/* Roles badges */}
