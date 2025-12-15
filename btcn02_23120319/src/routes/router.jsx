@@ -9,6 +9,7 @@ import User from "@/pages/User.jsx";
 import Profile from "@/components/user/Profile";
 import Favorites from "@/components/user/Favorites";
 import { Navigate } from "react-router-dom";
+import SearchResultsPage from "@/pages/SearchResultsPage.jsx";
 
 
 export const router = createBrowserRouter([
@@ -18,6 +19,7 @@ export const router = createBrowserRouter([
         ),
         children: [
             { path: "/", element: <Home /> },
+            { path: "/search", element: <SearchResultsPage /> },
             { path: "/movies/:id", element: <MovieDetailPage /> },
             {
                 path: "/user",

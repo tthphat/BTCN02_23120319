@@ -19,15 +19,15 @@ import {
 
 const options = [
     {
-        value: "Movie",
+        value: "title",
         label: "Movie",
     },
 
 ]
 
-export function ComboboxDemo() {
-    const [open, setOpen] = useState(false)
-    const [value, setValue] = useState("")
+export function ComboboxDemo({ value, setValue }) {
+    const [open, setOpen] = useState(false);
+    setValue(options[0].value);
 
     return (
         <Popover open={open} onOpenChange={setOpen}>
