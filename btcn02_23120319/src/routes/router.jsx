@@ -24,7 +24,7 @@ export const router = createBrowserRouter([
                 children: [
                     { index: true, element: <Navigate to="profile" replace /> },
                     { path: "profile", element: <Profile /> },
-                    // { path: "favorites", element: <Favorites /> }
+                    { path: "favorites", element: <Favorites /> }
                 ]
             },
         ],
