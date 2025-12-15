@@ -36,7 +36,7 @@ export function ComboboxDemo() {
                     variant="outline"
                     role="combobox"
                     aria-expanded={open}
-                    className="w-[200px] justify-between"
+                    className="w-[100px] justify-between py-5"
                 >
                     {value ?
                         options.find((option) => option.value === value)?.label
@@ -75,3 +75,5 @@ export function ComboboxDemo() {
         </Popover>
     )
 }
+
+export default ComboboxDemo
