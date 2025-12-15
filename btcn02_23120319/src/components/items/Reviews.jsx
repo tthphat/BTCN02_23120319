@@ -48,7 +48,7 @@ function Reviews({ movieID }) {
 
     return (
         <div className="mt-8">
-            <h2 className="text-2xl font-bold border-l-4 border-lime-400 mb-6">Reviews</h2>
+            <h2 className="text-2xl font-bold border-l-4 pl-2 border-lime-400 mb-6">Reviews</h2>
 
             <div className="space-y-4 mb-6">
                 {reviews.length === 0 ? (

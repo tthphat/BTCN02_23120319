@@ -6,7 +6,6 @@ import RegisterPage from "@/pages/RegisterPage.jsx";
 import MovieDetailPage from "@/pages/MovieDetailPage.jsx";
 import User from "@/pages/User.jsx";
 
-import Favorites from "@/components/user/Favorites";
 import Profile from "@/components/user/Profile";
 import { Navigate } from "react-router-dom";
 
@@ -25,7 +24,7 @@ export const router = createBrowserRouter([
                 children: [
                     { index: true, element: <Navigate to="profile" replace /> },
                     { path: "profile", element: <Profile /> },
-                    { path: "favorites", element: <Favorites /> }
+                    // { path: "favorites", element: <Favorites /> }
                 ]
             },
         ],
