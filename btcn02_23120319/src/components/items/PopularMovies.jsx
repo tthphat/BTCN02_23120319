@@ -15,9 +15,11 @@ const APP_TOKEN = import.meta.env.VITE_APP_TOKEN
 function PopularMovies() {
     const [movies, setMovies] = useState([]);
     const navigate = useNavigate();
+    const [loading, setLoading] = useState(false);
 
     const getPopularMovies = async () => {
         try {
+            setLoading(true);
             // Fetch page 1, 2, 3 sau đó gộp lại thành 1 mảng mới đủ 30 phim
             const promises = [1, 2, 3].map(page =>
                 fetch(`${API_URL}/movies/most-popular?page=${page}&limit=10`, {
@@ -37,10 +39,19 @@ function PopularMovies() {
             console.log("Fetched popular movies:", allMovies);
         } catch (error) {
             console.error(error);
+        } finally {
+            setLoading(false);
         }
     }
 
     useEffect(() => { getPopularMovies() }, []);
+
+    if (loading) {
+        return (
+            <>
+            </>
+        );
+    }
 
     return (
         <div className="w-full h-full row-start-2 px-16 relative overflow-hidden flex flex-col">
