@@ -63,6 +63,25 @@ function Favorites() {
         getFavorites();
     }, [token]);
 
+    const removeFavorite = async (movieID) => {
+        if (!confirm("Remove this movie from favorites?")) return;
+        try {
+            const response = await fetch(`${API_URL}/users/favorites/${movieID}`, {
+                method: "DELETE",
+                headers: {
+                    "x-app-token": APP_TOKEN,
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+
+            if (response.ok) {
+                // Load lại danh sách favorites
+                getFavorites();
+            }
+        } catch (error) {
+            console.error("Failed to remove favorite", error);
+        }
+    }
 
     if (loading && favorites.length === 0) return <div className="text-center py-10">Loading favorites...</div>;
 
@@ -105,6 +124,16 @@ function Favorites() {
                                         <span>{movie.external_ratings.rottenTomatoes}</span>
                                     </div>
                                 </div>
+
+                                <Button
+                                    variant="destructive"
+                                    size="sm"
+                                    className="w-full gap-2 mt-2 opacity-0 group-hover:opacity-100 transition-opacity"
+                                    onClick={() => removeFavorite(movie.id)}
+                                >
+                                    <Trash2 className="w-4 h-4" />
+                                    Remove
+                                </Button>
 
                             </div>
                         </div>
