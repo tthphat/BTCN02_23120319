@@ -64,7 +64,7 @@ export default function Profile() {
                                 </div>
                                 <div className="w-full flex flex-col gap-2">
                                     <h1 className="text-lg font-semibold">Date of Birth</h1>
-                                    <input type="text" readOnly placeholder={new Date(userInfo.dob).toLocaleDateString("vi-VN")} className="border rounded-md px-5 py-1 text-lg" />
+                                    <input type="text" readOnly placeholder={new Date(userInfo.dob).toLocaleDateString("vi-VN") || ""} className="border rounded-md px-5 py-1 text-lg" />
                                 </div>
                             </div>
                         </CardContent>
