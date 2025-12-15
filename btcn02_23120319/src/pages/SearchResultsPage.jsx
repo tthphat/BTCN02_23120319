@@ -2,14 +2,19 @@ import { useSearchParams } from "react-router-dom"
 import { useEffect, useState } from "react"
 import { Loader2, Calendar, Star } from "lucide-react"
 import { Link } from "react-router-dom"
+import { PaginationSection } from "@/components/common/PaginationSection"
 
 const API_URL = import.meta.env.VITE_API_URL;
 const APP_TOKEN = import.meta.env.VITE_APP_TOKEN;
 
 function SearchResultsPage() {
     const [searchParams] = useSearchParams();
+
     const [loading, setLoading] = useState(false);
     const [results, setResults] = useState([]); // mảng danh sách các kết quả tìm kiếm
+    const [page, setPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
+    const pageSize = 10;
 
 
     // Lấy catagory và input từ searchParams
@@ -18,7 +23,7 @@ function SearchResultsPage() {
     const getSearchResults = async () => {
         try {
             setLoading(true);
-            const response = await fetch(`${API_URL}/movies/search?${searchType}=${searchValue}&page=1&limit=10`, {
+            const response = await fetch(`${API_URL}/movies/search?${searchType}=${searchValue}&page=${page}&limit=${pageSize}`, {
                 headers: {
                     "x-app-token": APP_TOKEN,
                 }
@@ -30,6 +35,7 @@ function SearchResultsPage() {
             console.log(data);
 
             setResults(data.data);
+            setTotalPages(data.pagination.total_pages);
         } catch (error) {
             console.error(error);
         } finally {
@@ -39,7 +45,7 @@ function SearchResultsPage() {
 
     useEffect(() => {
         getSearchResults();
-    }, [searchType, searchValue]);//
+    }, [searchType, searchValue, page]);
 
     if (loading) {
         return (
@@ -87,6 +93,14 @@ function SearchResultsPage() {
                 ))}
             </div>
 
+            {/* Phân trang */}
+            {totalPages > 1 && (
+                <PaginationSection
+                    page={page}
+                    totalPages={totalPages}
+                    setPage={setPage}
+                />
+            )}
         </div>
     );
 }
