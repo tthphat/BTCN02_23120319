@@ -1,6 +1,6 @@
 import { useSearchParams } from "react-router-dom"
 import { useEffect, useState } from "react"
-import { Loader2, Calendar, Star } from "lucide-react"
+import { Loader2, Calendar, Star, CircleOff } from "lucide-react"
 import { Link } from "react-router-dom"
 import { PaginationSection } from "@/components/common/PaginationSection"
 
@@ -67,7 +67,17 @@ function SearchResultsPage() {
                                 src={movie.image}
                                 alt={movie.title}
                                 className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                                onError={(e) => {
+                                    e.currentTarget.style.display = 'none';
+                                    e.currentTarget.nextElementSibling.style.display = 'flex';
+                                }}
                             />
+                            {/* Khi ảnh lỗi thì hiện thay thế */}
+                            <div className="hidden w-full h-full bg-gray-300 dark:bg-gray-700 flex items-center justify-center">
+                                <CircleOff className="w-16 h-16 text-gray-400 dark:text-gray-500" />
+                            </div>
+
+                            {/* Màu nền khi hover ảnh */}
                             <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors" />
 
                             {/* Thông tin xuất hiện thêm khi hover */}
