@@ -12,6 +12,7 @@ import {
 
 function TopRating() {
     const [movies, setMovies] = useState([]);
+    const navigate = useNavigate();
 
     const getTopRatingMovies = async () => {
         try {
@@ -55,7 +56,17 @@ function TopRating() {
                             key={movie.id}
                             className="basis-1/3 h-full flex justify-center items-center py-4"
                         >
+                            <Card
+                                onClick={() => navigate(`/movies/${movie.id}`)}
+                                className="w-full max-w-[300px] aspect-[2/3] relative overflow-hidden border-0 rounded-xl shadow-lg cursor-pointer "
+                            >
+                                <img
+                                    src={movie.image}
+                                    alt={movie.title}
+                                    className="absolute inset-0 w-full h-full object-cover"
+                                />
 
+                            </Card>
                         </CarouselItem>
                     ))}
                 </CarouselContent>
