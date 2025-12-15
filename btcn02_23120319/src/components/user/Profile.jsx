@@ -3,7 +3,8 @@ import { Button } from "@/components/ui/button";
 import { useAuth } from "@/contexts/AuthContext";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import EditUserInfo from "./EditUserInfo";
+import EditUserInfo from "@/components/user/EditUserInfo";
+import { Loader2 } from "lucide-react";
 
 const API_URL = import.meta.env.VITE_API_URL;
 const APP_TOKEN = import.meta.env.VITE_APP_TOKEN;
@@ -41,7 +42,14 @@ export default function Profile() {
         getUser();
     }, []);
 
-    if (loading && !userInfo) return <div className="text-center py-10">Loading profile...</div>;
+    if (loading) {
+        return (
+            <div className="flex flex-col items-center justify-center min-h-[60vh] gap-4">
+                <Loader2 className="h-12 w-12 animate-spin text-blue-500" />
+                <p className="text-lg text-muted-foreground">Loading profile...</p>
+            </div>
+        );
+    }
 
     return (
         <>
