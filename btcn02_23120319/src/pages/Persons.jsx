@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Loader2, Calendar, Award, Ruler } from "lucide-react";
+import PersonKnowFor from "@/components/common/PersonKnowFor";
 
 const API_URL = import.meta.env.VITE_API_URL;
 const APP_TOKEN = import.meta.env.VITE_APP_TOKEN;
@@ -137,6 +138,7 @@ function Persons() {
 
                 </div>
             </div>
+            <PersonKnowFor know_for={person.known_for} />
         </div>
     );
 }
