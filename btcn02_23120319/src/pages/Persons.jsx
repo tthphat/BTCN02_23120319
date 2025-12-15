@@ -78,6 +78,62 @@ function Persons() {
                         </div>
                     )}
 
+                    {/* Thông tin cá nhân */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        {/*Ngày sinh */}
+                        <div className="flex items-start gap-2">
+                            <Calendar className="w-5 h-5 text-lime-400 mt-0.5" />
+                            <div>
+                                <p className="text-sm text-muted-foreground">Born</p>
+                                <p className="font-medium">
+                                    {person.birth_date
+                                        ? new Date(person.birth_date).toLocaleDateString('en-US', {
+                                            year: 'numeric',
+                                            month: 'long',
+                                            day: 'numeric'
+                                        })
+                                        : "Not available"
+                                    }
+                                </p>
+                            </div>
+                        </div>
+
+                        {/* Ngày mất */}
+                        <div className="flex items-start gap-2">
+                            <Calendar className="w-5 h-5 text-red-400 mt-0.5" />
+                            <div>
+                                <p className="text-sm text-muted-foreground">Died</p>
+                                <p className="font-medium">
+                                    {person.death_date
+                                        ? new Date(person.death_date).toLocaleDateString('en-US', {
+                                            year: 'numeric',
+                                            month: 'long',
+                                            day: 'numeric'
+                                        })
+                                        : "Not available"
+                                    }
+                                </p>
+                            </div>
+                        </div>
+
+                        {/* Chiều Cao */}
+                        <div className="flex items-start gap-2">
+                            <Ruler className="w-5 h-5 text-blue-400 mt-0.5" />
+                            <div>
+                                <p className="text-sm text-muted-foreground">Height</p>
+                                <p className="font-medium">{person.height || "Not available"}</p>
+                            </div>
+                        </div>
+
+                        {/* Giải thưởng */}
+                        <div className="flex items-start gap-2">
+                            <Award className="w-5 h-5 text-yellow-400 mt-0.5" />
+                            <div>
+                                <p className="text-sm text-muted-foreground">Awards</p>
+                                <p className="font-medium">{person.awards || "Not available"}</p>
+                            </div>
+                        </div>
+                    </div>
 
                 </div>
             </div>
