@@ -83,6 +83,13 @@ function Reviews({ movieID }) {
                 )}
             </div>
 
+            {totalPages > 1 && (
+                <PaginationSection
+                    page={page}
+                    totalPages={totalPages}
+                    setPage={setPage}
+                />
+            )}
         </div>
     );
 }
