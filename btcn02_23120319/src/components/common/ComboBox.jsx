@@ -19,15 +19,25 @@ import {
 
 const options = [
     {
+        value: "q",
+        label: "All",
+    },
+    {
         value: "title",
         label: "Movie",
     },
-
+    {
+        value: "genre",
+        label: "Genre",
+    },
+    {
+        value: "person",
+        label: "Person",
+    }
 ]
 
 export function ComboboxDemo({ value, setValue }) {
     const [open, setOpen] = useState(false);
-    setValue(options[0].value);
 
     return (
         <Popover open={open} onOpenChange={setOpen}>
@@ -46,7 +56,6 @@ export function ComboboxDemo({ value, setValue }) {
             </PopoverTrigger>
             <PopoverContent className="w-[200px] p-0">
                 <Command>
-                    <CommandInput placeholder="Search options..." className="h-9" />
                     <CommandList>
                         <CommandEmpty>No options found.</CommandEmpty>
                         <CommandGroup>
@@ -55,7 +64,9 @@ export function ComboboxDemo({ value, setValue }) {
                                     key={option.value}
                                     value={option.value}
                                     onSelect={(currentValue) => {
-                                        { CurrentValue !== value && setValue(currentValue) }
+                                        if (currentValue !== value) {
+                                            setValue(currentValue)
+                                        }
                                         setOpen(false)
                                     }}
                                 >

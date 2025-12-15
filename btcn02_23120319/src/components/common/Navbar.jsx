@@ -6,7 +6,7 @@ import { useState, useRef } from "react"
 
 
 function Navbar() {
-    const [value, setValue] = useState("");
+    const [value, setValue] = useState("q");
     const navigate = useNavigate();
     const searchInput = useRef(null);
     return (
