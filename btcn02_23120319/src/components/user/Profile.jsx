@@ -41,7 +41,7 @@ export default function Profile() {
         getUser();
     }, []);
 
-    if (loading && favorites.length === 0) return <div className="text-center py-10">Loading profile...</div>;
+    if (loading && !userInfo) return <div className="text-center py-10">Loading profile...</div>;
 
     return (
         <>
