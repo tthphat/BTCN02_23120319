@@ -1,4 +1,5 @@
-import { Link, Outlet } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
+import { cn } from "@/lib/utils";
 
 function User() {
     return (
@@ -10,14 +11,34 @@ function User() {
                 </div>
                 <ul className="space-y-2">
                     <li>
-                        <Link to="/user/profile" className="block p-2 hover:bg-accent rounded transition-colors">
+                        <NavLink
+                            to="/user/profile"
+                            className={({ isActive }) =>
+                                cn(
+                                    "block w-full px-4 py-2 rounded-lg transition-all duration-200 font-medium",
+                                    isActive
+                                        ? "bg-blue-500 text-white shadow-md"
+                                        : "text-gray-600 dark:text-gray-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:text-blue-600 dark:hover:text-blue-400"
+                                )
+                            }
+                        >
                             Profile
-                        </Link>
+                        </NavLink>
                     </li>
                     <li>
-                        <Link to="/user/favorites" className="block p-2 hover:bg-accent rounded transition-colors">
+                        <NavLink
+                            to="/user/favorites"
+                            className={({ isActive }) =>
+                                cn(
+                                    "block w-full px-4 py-2 rounded-lg transition-all duration-200 font-medium",
+                                    isActive
+                                        ? "bg-blue-500 text-white shadow-md"
+                                        : "text-gray-600 dark:text-gray-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:text-blue-600 dark:hover:text-blue-400"
+                                )
+                            }
+                        >
                             Favorites
-                        </Link>
+                        </NavLink>
                     </li>
                 </ul>
             </nav>

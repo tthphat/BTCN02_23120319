@@ -7,6 +7,7 @@ import MovieDetailPage from "@/pages/MovieDetailPage.jsx";
 import User from "@/pages/User.jsx";
 
 import Profile from "@/components/user/Profile";
+import Favorites from "@/components/user/Favorites";
 import { Navigate } from "react-router-dom";
 
 
