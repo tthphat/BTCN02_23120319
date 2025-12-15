@@ -12,9 +12,11 @@ export default function Profile() {
     const { token, logout } = useAuth();
     const [userInfo, setUserInfo] = useState(null);
     const navigate = useNavigate();
+    const [loading, setLoading] = useState(false); // Trạng thái loading
 
     const getUser = async () => {
         try {
+            setLoading(true);
             const response = await fetch(`${API_URL}/users/profile`, {
                 headers: {
                     "x-app-token": APP_TOKEN,
@@ -30,12 +32,16 @@ export default function Profile() {
             console.log(data);
         } catch (error) {
             console.error(error);
+        } finally {
+            setLoading(false);
         }
     }
 
     useEffect(() => {
         getUser();
     }, []);
+
+    if (loading && favorites.length === 0) return <div className="text-center py-10">Loading profile...</div>;
 
     return (
         <>
