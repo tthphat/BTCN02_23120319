@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Star, Play, Calendar, Eye, Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import Reviews from "@/components/items/Reviews";
 
 const API_URL = import.meta.env.VITE_API_URL;
 const APP_TOKEN = import.meta.env.VITE_APP_TOKEN;
@@ -160,6 +161,7 @@ function MovieDetailPage() {
                     </div>
                 </div>
             </div>
+            <Reviews movieID={id} />
         </div>
     );
 }
