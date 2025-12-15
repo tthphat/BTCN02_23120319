@@ -26,6 +26,8 @@ function Persons() {
             setPerson(data);
         } catch (error) {
             console.error(error);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -45,8 +47,25 @@ function Persons() {
     }
 
     return (
-        <div>
-            <h1>Persons</h1>
+        <div className="container mx-auto py-8 text-foreground">
+            <div className="grid grid-cols-1 md:grid-cols-[300px_1fr] gap-8">
+
+                {/* Left Column: Poster */}
+                <div className="flex flex-col gap-0 rounded-sm overflow-hidden">
+                    <div className="relative group aspect-[2/3] w-full">
+                        <img
+                            src={person.image}
+                            alt={person.name}
+                            className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity"
+                        />
+                    </div>
+
+                    {/* Right Column: Information */}
+                    <div className="flex flex-col gap-4">
+
+                    </div>
+                </div>
+            </div>
         </div>
     );
 }
