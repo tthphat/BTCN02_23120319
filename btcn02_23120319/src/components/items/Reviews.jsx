@@ -10,6 +10,41 @@ function Reviews({ movieID }) {
     const [totalPages, setTotalPages] = useState(1);
     const pageSize = 10;
 
+    async function getReviews() {
+        try {
+            // Gọi fetch lấy data reviews theo id của movie
+            const res = await fetch(`${API_URL}/movies/${movieID}/reviews?page=${page}&limit=${pageSize}&sort=newest`, {
+                method: "GET",
+                headers: {
+                    "x-app-token": APP_TOKEN,
+                },
+            });
+
+            if (!res.ok) {
+                console.log("Error status:", res.status);
+                return;
+            }
+
+            const data = await res.json();
+            console.log(data);
+            if (data.data) {
+                setReviews(data.data); //Cập nhật reviews
+            }
+
+            if (data.pagination) {
+                setTotalPages(data.pagination.total_pages); //Cập nhật tổng số trang
+            }
+
+        } catch (error) {
+            console.error("Failed to fetch reviews:", error);
+        }
+    }
+
+    useEffect(() => {
+        if (movieID) {
+            getReviews();
+        }
+    }, [page, movieID]); // gọi lại mỗi khi page hoặc movieID thay đổi
 
     return (
        
