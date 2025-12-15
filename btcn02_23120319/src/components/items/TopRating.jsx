@@ -94,6 +94,23 @@ function TopRating() {
                                         <span className="border border-white/30 px-1.5 py-0.5 rounded text-[10px]">HD</span>
                                     </div>
 
+                                    {/* Thông tin thêm khi hover */}
+                                    <div className="opacity-0 max-h-0 group-hover:opacity-100 group-hover:max-h-20 transition-all duration-300 overflow-hidden">
+                                        <div className="flex flex-wrap gap-1 mt-2">
+                                            {movie.genres?.slice(0, 2).map((genre, idx) => (
+                                                <span key={idx} className="text-[10px] bg-white/20 px-2 py-0.5 rounded-full">
+                                                    {genre}
+                                                </span>
+                                            ))}
+                                            {movie.genres?.length > 2 && (
+                                                <span className="text-[10px] bg-white/20 px-2 py-0.5 rounded-full">+{movie.genres.length - 2}</span>
+                                            )}
+                                        </div>
+                                        <div className="mt-2">
+                                            <span className="text-[10px] bg-white/20 px-2 py-0.5 rounded-full">Revenue: {movie.box_office_revenue}</span>
+                                        </div>
+                                    </div>
+
                                 </div>
 
                             </Card>
