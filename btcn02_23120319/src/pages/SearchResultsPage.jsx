@@ -57,10 +57,10 @@ function SearchResultsPage() {
     }
 
     return (
-        <div className="p-5">
+        <div className="flex flex-col gap-6 p-5">
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
                 {results.map((movie) => (
-                    <div key={movie.id} className="group relative bg-card rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-all border border-border">
+                    <div key={movie.id} className="group relative bg-card rounded-lg overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-300 border border-border hover:scale-110 hover:z-10">
                         {/* Poster phim */}
                         <Link to={`/movies/${movie.id}`} className="block relative aspect-[2/3] overflow-hidden">
                             <img
@@ -69,6 +69,22 @@ function SearchResultsPage() {
                                 className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                             />
                             <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors" />
+
+                            {/* Thông tin xuất hiện thêm khi hover */}
+                            <div className="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-black/95 via-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                <div className="flex flex-wrap gap-1">
+                                    {movie.genres?.slice(0, 2).map((genre, idx) => (
+                                        <span key={idx} className="text-[10px] bg-white/20 text-white px-2 py-0.5 rounded-full backdrop-blur-sm">
+                                            {genre}
+                                        </span>
+                                    ))}
+                                    {movie.genres?.length > 2 && (
+                                        <span className="text-[10px] bg-white/20 text-white px-2 py-0.5 rounded-full backdrop-blur-sm">
+                                            +{movie.genres.length - 2}
+                                        </span>
+                                    )}
+                                </div>
+                            </div>
                         </Link>
 
                         {/* Thông tin phim */}
