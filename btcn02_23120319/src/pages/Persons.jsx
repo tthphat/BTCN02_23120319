@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { Loader2 } from "lucide-react";
+import { Loader2, Calendar, Award, Ruler } from "lucide-react";
 
 const API_URL = import.meta.env.VITE_API_URL;
 const APP_TOKEN = import.meta.env.VITE_APP_TOKEN;
@@ -24,6 +24,7 @@ function Persons() {
             }
             const data = await response.json();
             setPerson(data);
+            console.log(data);
         } catch (error) {
             console.error(error);
         } finally {
@@ -56,14 +57,28 @@ function Persons() {
                         <img
                             src={person.image}
                             alt={person.name}
-                            className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity"
+                            className="w-full h-full object-cover opacity-80"
                         />
                     </div>
+                </div>
 
-                    {/* Right Column: Information */}
-                    <div className="flex flex-col gap-4">
-
+                {/* Right Column: Information */}
+                <div className="flex flex-col gap-6">
+                    {/* Name & Nghề nghiệp */}
+                    <div>
+                        <h1 className="text-4xl font-bold text-lime-400 mb-1">{person.name}</h1>
+                        <h2 className="text-xl text-muted-foreground">{person.role}</h2>
                     </div>
+
+                    {/* Tiểu sử */}
+                    {person.summary && (
+                        <div>
+                            <h3 className="text-xl font-semibold mb-2">Summary</h3>
+                            <p className="text-muted-foreground leading-relaxed">{person.summary}</p>
+                        </div>
+                    )}
+
+
                 </div>
             </div>
         </div>
