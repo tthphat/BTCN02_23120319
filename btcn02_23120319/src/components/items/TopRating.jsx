@@ -49,7 +49,16 @@ function TopRating() {
                 }}
                 className="w-full flex-1 relative"
             >
+                <CarouselContent className="w-full h-full">
+                    {movies.map(movie => (
+                        <CarouselItem
+                            key={movie.id}
+                            className="basis-1/3 h-full flex justify-center items-center py-4"
+                        >
 
+                        </CarouselItem>
+                    ))}
+                </CarouselContent>
 
                 <CarouselPrevious />
                 <CarouselNext />
