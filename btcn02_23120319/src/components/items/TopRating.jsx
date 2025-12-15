@@ -15,9 +15,11 @@ const APP_TOKEN = import.meta.env.VITE_APP_TOKEN
 function TopRating() {
     const [movies, setMovies] = useState([]);
     const navigate = useNavigate();
+    const [loading, setLoading] = useState(false);
 
     const getTopRatingMovies = async () => {
         try {
+            setLoading(true);
             // Fetch page 1, 2, 3 sau đó gộp lại thành 1 mảng mới đủ 30 phim
             const promises = [1, 2, 3].map(page =>
                 fetch(`${API_URL}/movies/top-rated?category=IMDB_TOP_50&page=${page}&limit=10`, {
@@ -37,10 +39,19 @@ function TopRating() {
             console.log("Fetched top rating movies:", allMovies);
         } catch (error) {
             console.error(error);
+        } finally {
+            setLoading(false);
         }
     }
 
     useEffect(() => { getTopRatingMovies() }, []);
+
+    if (loading) {
+        return (
+            <>
+            </>
+        );
+    }
 
     return (
         <div className="w-full h-full row-start-3 px-16 relative overflow-hidden flex flex-col">
