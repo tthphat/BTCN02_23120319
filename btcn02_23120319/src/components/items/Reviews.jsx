@@ -47,7 +47,38 @@ function Reviews({ movieID }) {
     }, [page, movieID]); // gọi lại mỗi khi page hoặc movieID thay đổi
 
     return (
-       
+        <div className="mt-8">
+            <h2 className="text-2xl font-bold border-l-4 border-lime-400 mb-6">Reviews</h2>
+
+            <div className="space-y-4 mb-6">
+                {reviews.length === 0 ? (
+                    <p className="text-gray-500">No reviews yet.</p>
+                ) : (
+                    reviews.map((review) => (
+                        <div key={review.id} className="p-4 border rounded-lg shadow-sm bg-card text-card-foreground">
+                            <div className="flex justify-between items-start mb-2">
+                                <div className="flex items-center gap-2">
+                                    <span className="font-semibold text-lg">{review.username}</span>
+                                    <span className="text-xs text-muted-foreground">
+                                        {new Date(review.date).toLocaleDateString()}
+                                    </span>
+                                </div>
+                                <div className="bg-yellow-100 text-yellow-700 px-2 py-1 rounded text-sm font-bold flex items-center gap-1">
+                                    <span>★</span> {review.rate}
+                                </div>
+                            </div>
+
+                            {review.title && <h3 className="font-medium mb-1">{review.title}</h3>}
+
+                            <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
+                                {review.content}
+                            </p>
+                        </div>
+                    ))
+                )}
+            </div>
+
+        </div>
     );
 }
 
