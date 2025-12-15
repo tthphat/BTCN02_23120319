@@ -112,6 +112,15 @@ function Favorites() {
                 </div>
             )}
 
+            {/* Phân trang */}
+            {totalPages > 1 && (
+                <PaginationSection
+                    page={page}
+                    totalPages={totalPages}
+                    setPage={setPage}
+                />
+            )}
+
         </div>
     );
 }
