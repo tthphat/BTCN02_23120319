@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { useAuth } from "@/contexts/AuthContext";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import EditUserInfo from "./EditUserInfo";
 
 const API_URL = import.meta.env.VITE_API_URL;
 const APP_TOKEN = import.meta.env.VITE_APP_TOKEN;
@@ -26,7 +27,7 @@ export default function Profile() {
             }
             const data = await response.json();
             setUserInfo(data);
-            return data;
+            console.log(data);
         } catch (error) {
             console.error(error);
         }
@@ -41,8 +42,11 @@ export default function Profile() {
             {userInfo ? (
                 <div className="flex justify-center items-center py-10">
                     <Card className="w-md lg:w-xl ">
-                        <CardHeader>
+                        <CardHeader className="relative">
                             <CardTitle className="text-2xl text-center">Profile</CardTitle>
+                            <div className="absolute top-4 right-4">
+                                <EditUserInfo initialData={userInfo} getUser={getUser} />
+                            </div>
                         </CardHeader>
                         <CardContent>
                             <div className="flex flex-col gap-3">
