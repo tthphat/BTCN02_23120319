@@ -67,7 +67,7 @@ export default function Profile() {
                             </div>
                         </CardContent>
                         <CardFooter className="flex flex-col justify-center">
-                            <Button className="text-foreground bg-orange-700 w-70 rounded-lg hover:bg-orange-600 transition-all"
+                            <Button className="text-white bg-orange-700 w-70 rounded-lg hover:bg-orange-600 transition-all"
                                 onClick={logout}
                             >
                                 Logout

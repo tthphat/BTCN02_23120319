@@ -30,6 +30,8 @@ export function AuthProvider({ children }) {
 
         localStorage.setItem("user", JSON.stringify(data.user));
         localStorage.setItem("token", data.token);
+
+        console.log("Login success", data);
     }
 
     const register = async (user) => {
@@ -53,11 +55,15 @@ export function AuthProvider({ children }) {
 
         localStorage.setItem("user", JSON.stringify(data.user));
         localStorage.setItem("token", data.token);
+
+        console.log("Register success", data);
     }
 
     const logout = () => {
         setUser(null);
+        setToken(null);
         localStorage.removeItem("user");
+        localStorage.removeItem("token");
     };
 
     return (

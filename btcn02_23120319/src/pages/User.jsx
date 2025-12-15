@@ -7,7 +7,7 @@ function User() {
             <nav className="border-r pr-4 h-full">
                 <div className="mb-6">
                     <h3 className="font-bold text-lg mb-2">Account</h3>
-                    <p className="text-sm text-muted-foreground">Welcome, user!</p>
+                    <p className="text-sm text-muted-foreground border-b pb-2">Welcome, user!</p>
                 </div>
                 <ul className="space-y-2">
                     <li>
