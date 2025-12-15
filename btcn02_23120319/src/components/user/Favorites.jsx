@@ -1,6 +1,6 @@
-import PaginationSection from "@/components/PaginationSection";
+import { PaginationSection } from "@/components/common/PaginationSection";
 import { useState, useEffect } from "react";
-import { useAuth } from "@/context/AuthContext";
+import { useAuth } from "@/contexts/AuthContext";
 
 const API_URL = import.meta.env.VITE_API_URL
 const APP_TOKEN = import.meta.env.VITE_APP_TOKEN

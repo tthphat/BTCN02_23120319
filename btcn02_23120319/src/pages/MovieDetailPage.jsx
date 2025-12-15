@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { Star, Play, Calendar, Eye, Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Reviews from "@/components/items/Reviews";
+import AddFavorites from "@/components/user/AddFavorites";
 
 const API_URL = import.meta.env.VITE_API_URL;
 const APP_TOKEN = import.meta.env.VITE_APP_TOKEN;
@@ -56,10 +57,7 @@ function MovieDetailPage() {
 
                         {/* Follow Button */}
                         <div className="absolute top-4 left-4">
-                            <Button size="sm" variant="secondary" className="gap-2 bg-black/60 hover:bg-black/80 text-white border-none backdrop-blur-sm cursor-pointer">
-                                <Heart className="w-4 h-4" />
-                                Yêu thích
-                            </Button>
+                            <AddFavorites movieID={movie.id} />
                         </div>
 
                         {/* Play Icon (Center) */}
