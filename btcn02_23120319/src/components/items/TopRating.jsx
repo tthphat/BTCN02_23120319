@@ -66,6 +66,21 @@ function TopRating() {
                                     className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                                 />
 
+                                {/* Nền đen khi hover */}
+                                <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors duration-300" />
+
+                                {/* Background gradient đen từ bên dưới */}
+                                <div className="absolute inset-x-0 bottom-0 h-full bg-gradient-to-t from-black/90 to-transparent" />
+
+                                {/* Nút Play khi hover */}
+                                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 scale-75 group-hover:scale-100">
+                                    <div className="w-12 h-12 rounded-full bg-lime-400 text-black flex items-center justify-center shadow-lg">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6 ml-0.5">
+                                            <path fillRule="evenodd" d="M4.5 5.653c0-1.426 1.529-2.33 2.779-1.643l11.54 6.348c1.295.712 1.295 2.573 0 3.285L7.28 19.991c-1.25.687-2.779-.217-2.779-1.643V5.653z" clipRule="evenodd" />
+                                        </svg>
+                                    </div>
+                                </div>
+
                                 <div className="absolute bottom-0 left-0 w-full p-4 text-white transform transition-transform duration-300 group-hover:-translate-y-2">
                                     <h3 className="text-xl font-bold mb-1 line-clamp-2 leading-tight">
                                         {movie.title}
