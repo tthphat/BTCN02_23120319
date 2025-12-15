@@ -77,8 +77,15 @@ export default function Profile() {
                     </Card>
                 </div>
             ) : (
-                <div className="flex justify-center items-center py-10">
-                    <p className="text-2xl font-bold">Please login to view your profile</p>
+                <div className="flex justify-center items-center">
+                    <Card className="w-sm h-[200px] md:w-lg md:h-[300px] flex justify-center items-center">
+                        <div className="flex flex-col items-center justify-center p-5 gap-5">
+                            <h1 className="text-xl font-semibold">Login or Sigup to see your profile</h1>
+                            <Button className="w-50 bg-blue-500 rounded-lg hover:bg-blue-600 transition-all" onClick={() => { setView("login") }}>
+                                Login
+                            </Button>
+                        </div>
+                    </Card>
                 </div>
             )}
         </>
