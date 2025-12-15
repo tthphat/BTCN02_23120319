@@ -8,6 +8,7 @@ import {
     CarouselNext,
     CarouselPrevious,
 } from "@/components/ui/carousel";
+import { Loader2 } from "lucide-react";
 
 const API_URL = import.meta.env.VITE_API_URL
 const APP_TOKEN = import.meta.env.VITE_APP_TOKEN
@@ -15,9 +16,11 @@ const APP_TOKEN = import.meta.env.VITE_APP_TOKEN
 function Best5Movie() {
     const [movies, setMovies] = useState([]);
     const navigate = useNavigate();
+    const [loading, setLoading] = useState(false);
 
     const getBest5Movie = async () => {
         try {
+            setLoading(true);
             const response = await fetch(`${API_URL}/movies/most-popular?page=1&limit=5`, {
                 headers: {
                     "x-app-token": APP_TOKEN,
@@ -32,10 +35,21 @@ function Best5Movie() {
             console.log(data);
         } catch (error) {
             console.error(error);
+        } finally {
+            setLoading(false);
         }
     }
 
     useEffect(() => { getBest5Movie() }, []);
+
+    if (loading) {
+        return (
+            <div className="flex flex-col items-center justify-center min-h-[60vh] gap-4">
+                <Loader2 className="h-12 w-12 animate-spin text-blue-500" />
+                <p className="text-lg text-muted-foreground">Loading...</p>
+            </div>
+        );
+    }
 
     return (
         <div className="w-full h-full row-start-1 px-30 relative">
