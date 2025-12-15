@@ -10,12 +10,13 @@ const APP_TOKEN = import.meta.env.VITE_APP_TOKEN
 
 function Favorites() {
     const { token } = useAuth();
-    const [allFavorites, setAllFavorites] = useState([]); // mảng chứa toàn bộ danh sách favorites
-    const [favorites, setFavorites] = useState([]); // mảng chứa danh sách favorites trong 1 trang
-    const [page, setPage] = useState(1); // số trang hiện tại
-    const [totalPages, setTotalPages] = useState(1); // tổng số trang
+    const [allFavorites, setAllFavorites] = useState([]); // Danh sách toàn bộ favorites movie
+    const [favorites, setFavorites] = useState([]); // Danh sách favorites movie trong 1 trang
+    const [page, setPage] = useState(1); // Số trang hiện tại
+    const [totalPages, setTotalPages] = useState(1); // Tổng số trang
+    const [loading, setLoading] = useState(false); // Trạng thái loading
 
-    const pageSize = 3; // số lượng phim hiển thị trong 1 trang
+    const pageSize = 3; // Số lượng phim hiển thị trong 1 trang
 
     // Hàm fetch data favorites movie
     const getFavorites = async () => {
@@ -63,6 +64,8 @@ function Favorites() {
     }, [token]);
 
 
+    if (loading && favorites.length === 0) return <div className="text-center py-10">Loading favorites...</div>;
+
     return (
         <div className="space-y-6">
             <h2 className="text-2xl font-bold border-l-4 border-lime-400 pl-4">My Favorite Movies</h2>
@@ -108,7 +111,6 @@ function Favorites() {
                     ))}
                 </div>
             )}
-
 
         </div>
     );
