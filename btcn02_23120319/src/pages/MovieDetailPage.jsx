@@ -4,6 +4,7 @@ import { Star, Play, Calendar, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Reviews from "@/components/items/Reviews";
 import AddFavorites from "@/components/user/AddFavorites";
+import { Link } from "react-router-dom";
 
 const API_URL = import.meta.env.VITE_API_URL;
 const APP_TOKEN = import.meta.env.VITE_APP_TOKEN;
@@ -149,7 +150,7 @@ function MovieDetailPage() {
                                     <span className="text-muted-foreground text-sm block mb-1">Director:</span>
                                     <div className="flex flex-wrap gap-2">
                                         {movie.directors.map(director => (
-                                            <span key={director.id} className="font-medium">{director.name}</span>
+                                            <Link to={`/persons/${director.id}`} key={director.id} className="font-medium mr-4">{director.name}</Link>
                                         ))}
                                     </div>
                                 </div>
@@ -158,7 +159,9 @@ function MovieDetailPage() {
                                 <div>
                                     <span className="text-muted-foreground text-sm block mb-1">Cast:</span>
                                     <div className="text-sm">
-                                        {movie.actors.slice(0, 5).map(actor => actor.name).join(", ")}
+                                        {movie.actors.map(actor => (
+                                            <Link to={`/persons/${actor.id}`} key={actor.id} className="font-medium mr-4">{actor.name}</Link>
+                                        ))}
                                     </div>
                                 </div>
                             )}
