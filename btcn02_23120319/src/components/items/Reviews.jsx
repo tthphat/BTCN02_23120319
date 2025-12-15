@@ -62,6 +62,11 @@ function Reviews({ movieID }) {
                                     <span className="text-xs text-muted-foreground">
                                         {new Date(review.date).toLocaleDateString()}
                                     </span>
+                                    {review.warning_spoilers &&
+                                        <div className="bg-red-100 text-red-700 px-2 py-1 rounded text-sm font-bold flex items-center gap-1">
+                                            <span className="text-xs text-red-500">Warning spoilers</span>
+                                        </div>
+                                    }
                                 </div>
                                 <div className="bg-yellow-100 text-yellow-700 px-2 py-1 rounded text-sm font-bold flex items-center gap-1">
                                     <span>★</span> {review.rate}
