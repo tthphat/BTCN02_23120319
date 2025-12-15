@@ -2,6 +2,7 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/componen
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/contexts/AuthContext";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const API_URL = import.meta.env.VITE_API_URL;
 const APP_TOKEN = import.meta.env.VITE_APP_TOKEN;
@@ -9,6 +10,7 @@ const APP_TOKEN = import.meta.env.VITE_APP_TOKEN;
 export default function Profile() {
     const { token, logout } = useAuth();
     const [userInfo, setUserInfo] = useState(null);
+    const navigate = useNavigate();
 
     const getUser = async () => {
         try {
@@ -68,7 +70,10 @@ export default function Profile() {
                         </CardContent>
                         <CardFooter className="flex flex-col justify-center">
                             <Button className="text-white bg-orange-700 w-70 rounded-lg hover:bg-orange-600 transition-all"
-                                onClick={logout}
+                                onClick={() => {
+                                    logout();
+                                    navigate("/");
+                                }}
                             >
                                 Logout
                             </Button>
@@ -81,7 +86,7 @@ export default function Profile() {
                     <Card className="w-sm h-[200px] md:w-lg md:h-[300px] flex justify-center items-center">
                         <div className="flex flex-col items-center justify-center p-5 gap-5">
                             <h1 className="text-xl font-semibold">Login or Sigup to see your profile</h1>
-                            <Button className="w-50 bg-blue-500 rounded-lg hover:bg-blue-600 transition-all" onClick={() => { setView("login") }}>
+                            <Button className="w-50 bg-blue-500 rounded-lg hover:bg-blue-600 transition-all" onClick={() => { navigate("/login") }}>
                                 Login
                             </Button>
                         </div>

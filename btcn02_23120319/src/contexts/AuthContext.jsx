@@ -59,11 +59,27 @@ export function AuthProvider({ children }) {
         console.log("Register success", data);
     }
 
-    const logout = () => {
+    const logout = async () => {
+        const response = await fetch(`${API_URL}/users/logout`, {
+            method: "POST",
+            headers: {
+                "x-app-token": APP_TOKEN,
+                "Authorization": `Bearer ${token}`,
+            },
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(data.message || "Logout failed");
+        }
+
         setUser(null);
         setToken(null);
         localStorage.removeItem("user");
         localStorage.removeItem("token");
+
+        console.log(data);
     };
 
     return (
