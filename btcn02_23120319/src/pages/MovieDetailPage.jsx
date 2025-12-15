@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Star, Play, Calendar, Eye, Heart } from "lucide-react";
+import { Star, Play, Calendar, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Reviews from "@/components/items/Reviews";
 import AddFavorites from "@/components/user/AddFavorites";
@@ -40,7 +40,15 @@ function MovieDetailPage() {
         }
     }, [id]);
 
-    if (loading) return <div className="text-center py-10">Loading...</div>;
+    if (loading) {
+        return (
+            <div className="flex flex-col items-center justify-center min-h-[60vh] gap-4">
+                <Loader2 className="h-12 w-12 animate-spin text-blue-500" />
+                <p className="text-lg text-muted-foreground">Loading...</p>
+            </div>
+        );
+    }
+
     if (!movie) return <div className="text-center py-10">Movie not found</div>;
 
     return (
