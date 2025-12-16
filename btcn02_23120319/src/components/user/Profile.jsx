@@ -1,4 +1,10 @@
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/contexts/AuthContext";
 import { useEffect, useState } from "react";
@@ -10,108 +16,146 @@ const API_URL = import.meta.env.VITE_API_URL;
 const APP_TOKEN = import.meta.env.VITE_APP_TOKEN;
 
 export default function Profile() {
-    const { token, logout } = useAuth();
-    const [userInfo, setUserInfo] = useState(null);
-    const navigate = useNavigate();
-    const [loading, setLoading] = useState(false); // Trạng thái loading
+  const { token, logout } = useAuth();
+  const [userInfo, setUserInfo] = useState(null);
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false); // Trạng thái loading
 
-    const getUser = async () => {
-        try {
-            setLoading(true);
-            const response = await fetch(`${API_URL}/users/profile`, {
-                headers: {
-                    "x-app-token": APP_TOKEN,
-                    "Authorization": `Bearer ${token}`,
-                },
-            });
+  const getUser = async () => {
+    try {
+      setLoading(true);
+      const response = await fetch(`${API_URL}/users/profile`, {
+        headers: {
+          "x-app-token": APP_TOKEN,
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
-            if (!response.ok) {
-                throw new Error("Failed to fetch user profile");
-            }
-            const data = await response.json();
-            setUserInfo(data);
-            console.log(data);
-        } catch (error) {
-            console.error(error);
-        } finally {
-            setLoading(false);
-        }
+      if (!response.ok) {
+        throw new Error("Failed to fetch user profile");
+      }
+      const data = await response.json();
+      setUserInfo(data);
+      console.log(data);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
     }
+  };
 
-    useEffect(() => {
-        getUser();
-    }, []);
-
-    if (loading) {
-        return (
-            <div className="flex flex-col items-center justify-center min-h-[60vh] gap-4">
-                <Loader2 className="h-12 w-12 animate-spin text-blue-500" />
-                <p className="text-lg text-muted-foreground">Loading profile...</p>
-            </div>
-        );
+  useEffect(() => {
+    if (!token) {
+      // Chưa có token (ví dụ sau reload đang rehydrate) thì không gọi API
+      return;
     }
+    getUser();
+  }, [token]);
 
+  if (loading) {
     return (
-        <>
-            {userInfo ? (
-                <div className="flex justify-center items-center py-10">
-                    <Card className="w-md lg:w-xl ">
-                        <CardHeader className="relative">
-                            <CardTitle className="text-2xl text-center">Profile</CardTitle>
-                            <div className="absolute top-4 right-4">
-                                <EditUserInfo initialData={userInfo} getUser={getUser} />
-                            </div>
-                        </CardHeader>
-                        <CardContent>
-                            <div className="flex flex-col gap-3">
-                                <div className="w-full flex flex-col gap-2">
-                                    <h1 className="text-lg font-semibold">Username</h1>
-                                    <input type="text" readOnly placeholder={userInfo.username} className="border rounded-md px-5 py-1 text-lg" />
-                                </div>
-                                <div className="w-full flex flex-col gap-2">
-                                    <h1 className="text-lg font-semibold">Role</h1>
-                                    <input type="text" readOnly placeholder={userInfo.role} className="border rounded-md px-5 py-1 text-lg" />
-                                </div>
-                                <div className="w-full flex flex-col gap-2">
-                                    <h1 className="text-lg font-semibold">Email</h1>
-                                    <input type="text" readOnly placeholder={userInfo.email} className="border rounded-md px-5 py-1 text-lg" />
-                                </div>
-                                <div className="w-full flex flex-col gap-2">
-                                    <h1 className="text-lg font-semibold">Phone</h1>
-                                    <input type="text" readOnly placeholder={userInfo.phone} className="border rounded-md px-5 py-1 text-lg" />
-                                </div>
-                                <div className="w-full flex flex-col gap-2">
-                                    <h1 className="text-lg font-semibold">Date of Birth</h1>
-                                    <input type="text" readOnly placeholder={new Date(userInfo.dob).toLocaleDateString("vi-VN") || ""} className="border rounded-md px-5 py-1 text-lg" />
-                                </div>
-                            </div>
-                        </CardContent>
-                        <CardFooter className="flex flex-col justify-center">
-                            <Button className="text-white bg-orange-700 w-70 rounded-lg hover:bg-orange-600 transition-all"
-                                onClick={() => {
-                                    logout();
-                                    navigate("/");
-                                }}
-                            >
-                                Logout
-                            </Button>
-                            <p className="mt-4 text-sm text-gray-500">Only you can see it.</p>
-                        </CardFooter>
-                    </Card>
-                </div>
-            ) : (
-                <div className="flex justify-center items-center">
-                    <Card className="w-sm h-[200px] md:w-lg md:h-[300px] flex justify-center items-center">
-                        <div className="flex flex-col items-center justify-center p-5 gap-5">
-                            <h1 className="text-xl font-semibold">Login or Sigup to see your profile</h1>
-                            <Button className="w-50 bg-blue-500 rounded-lg hover:bg-blue-600 transition-all" onClick={() => { navigate("/login") }}>
-                                Login
-                            </Button>
-                        </div>
-                    </Card>
-                </div>
-            )}
-        </>
+      <div className="flex flex-col items-center justify-center min-h-[60vh] gap-4">
+        <Loader2 className="h-12 w-12 animate-spin text-blue-500" />
+        <p className="text-lg text-muted-foreground">Loading profile...</p>
+      </div>
     );
-}
+  }
 
+  return (
+    <>
+      {userInfo ? (
+        <div className="flex justify-center items-center py-10">
+          <Card className="w-md lg:w-xl ">
+            <CardHeader className="relative">
+              <CardTitle className="text-2xl text-center">Profile</CardTitle>
+              <div className="absolute top-4 right-4">
+                <EditUserInfo initialData={userInfo} getUser={getUser} />
+              </div>
+            </CardHeader>
+            <CardContent>
+              <div className="flex flex-col gap-3">
+                <div className="w-full flex flex-col gap-2">
+                  <h1 className="text-lg font-semibold">Username</h1>
+                  <input
+                    type="text"
+                    readOnly
+                    placeholder={userInfo.username}
+                    className="border rounded-md px-5 py-1 text-lg"
+                  />
+                </div>
+                <div className="w-full flex flex-col gap-2">
+                  <h1 className="text-lg font-semibold">Role</h1>
+                  <input
+                    type="text"
+                    readOnly
+                    placeholder={userInfo.role}
+                    className="border rounded-md px-5 py-1 text-lg"
+                  />
+                </div>
+                <div className="w-full flex flex-col gap-2">
+                  <h1 className="text-lg font-semibold">Email</h1>
+                  <input
+                    type="text"
+                    readOnly
+                    placeholder={userInfo.email}
+                    className="border rounded-md px-5 py-1 text-lg"
+                  />
+                </div>
+                <div className="w-full flex flex-col gap-2">
+                  <h1 className="text-lg font-semibold">Phone</h1>
+                  <input
+                    type="text"
+                    readOnly
+                    placeholder={userInfo.phone}
+                    className="border rounded-md px-5 py-1 text-lg"
+                  />
+                </div>
+                <div className="w-full flex flex-col gap-2">
+                  <h1 className="text-lg font-semibold">Date of Birth</h1>
+                  <input
+                    type="text"
+                    readOnly
+                    placeholder={
+                      new Date(userInfo.dob).toLocaleDateString("vi-VN") || ""
+                    }
+                    className="border rounded-md px-5 py-1 text-lg"
+                  />
+                </div>
+              </div>
+            </CardContent>
+            <CardFooter className="flex flex-col justify-center">
+              <Button
+                className="text-white bg-orange-700 w-70 rounded-lg hover:bg-orange-600 transition-all"
+                onClick={() => {
+                  logout();
+                  navigate("/");
+                }}
+              >
+                Logout
+              </Button>
+              <p className="mt-4 text-sm text-gray-500">Only you can see it.</p>
+            </CardFooter>
+          </Card>
+        </div>
+      ) : (
+        <div className="flex justify-center items-center">
+          <Card className="w-sm h-[200px] md:w-lg md:h-[300px] flex justify-center items-center">
+            <div className="flex flex-col items-center justify-center p-5 gap-5">
+              <h1 className="text-xl font-semibold">
+                Login or Sigup to see your profile
+              </h1>
+              <Button
+                className="w-50 bg-blue-500 rounded-lg hover:bg-blue-600 transition-all"
+                onClick={() => {
+                  navigate("/login");
+                }}
+              >
+                Login
+              </Button>
+            </div>
+          </Card>
+        </div>
+      )}
+    </>
+  );
+}
