@@ -6,7 +6,6 @@ import PersonKnowFor from "@/components/common/PersonKnowFor";
 const API_URL = import.meta.env.VITE_API_URL;
 const APP_TOKEN = import.meta.env.VITE_APP_TOKEN;
 
-
 function Persons() {
     const { id } = useParams();
     const [person, setPerson] = useState(null);
@@ -51,10 +50,9 @@ function Persons() {
     return (
         <div className="container mx-auto py-8 text-foreground">
             <div className="grid grid-cols-1 md:grid-cols-[300px_1fr] gap-8">
-
                 {/* Left Column: Poster */}
-                <div className="flex flex-col gap-0 rounded-sm overflow-hidden">
-                    <div className="relative group aspect-[2/3] w-full">
+                <div className="flex flex-col rounded-sm overflow-hidden">
+                    <div className="aspect-[2/3] w-full bg-gray-300">
                         <img
                             src={person.image}
                             alt={person.name}
@@ -67,7 +65,9 @@ function Persons() {
                 <div className="flex flex-col gap-6">
                     {/* Name & Nghề nghiệp */}
                     <div>
-                        <h1 className="text-4xl font-bold text-lime-400 mb-1">{person.name}</h1>
+                        <h1 className="text-4xl font-bold text-lime-400 mb-1">
+                            {person.name}
+                        </h1>
                         <h2 className="text-xl text-muted-foreground">{person.role}</h2>
                     </div>
 
@@ -75,7 +75,9 @@ function Persons() {
                     {person.summary && (
                         <div>
                             <h3 className="text-xl font-semibold mb-2">Summary</h3>
-                            <p className="text-muted-foreground leading-relaxed">{person.summary}</p>
+                            <p className="text-muted-foreground leading-relaxed">
+                                {person.summary}
+                            </p>
                         </div>
                     )}
 
@@ -83,59 +85,52 @@ function Persons() {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         {/*Ngày sinh */}
                         <div className="flex items-start gap-2">
-                            <Calendar className="w-5 h-5 text-lime-400 mt-0.5" />
+                            <Calendar className="w-5 h-5 text-lime-400" />
                             <div>
                                 <p className="text-sm text-muted-foreground">Born</p>
                                 <p className="font-medium">
                                     {person.birth_date
-                                        ? new Date(person.birth_date).toLocaleDateString('en-US', {
-                                            year: 'numeric',
-                                            month: 'long',
-                                            day: 'numeric'
-                                        })
-                                        : "Not available"
-                                    }
+                                        ? new Date(person.birth_date).toLocaleDateString("vi-VN")
+                                        : "Not available"}
                                 </p>
                             </div>
                         </div>
 
                         {/* Ngày mất */}
                         <div className="flex items-start gap-2">
-                            <Calendar className="w-5 h-5 text-red-400 mt-0.5" />
+                            <Calendar className="w-5 h-5 text-red-400" />
                             <div>
                                 <p className="text-sm text-muted-foreground">Died</p>
                                 <p className="font-medium">
                                     {person.death_date
-                                        ? new Date(person.death_date).toLocaleDateString('en-US', {
-                                            year: 'numeric',
-                                            month: 'long',
-                                            day: 'numeric'
-                                        })
-                                        : "Not available"
-                                    }
+                                        ? new Date(person.death_date).toLocaleDateString("en-US")
+                                        : "Not available"}
                                 </p>
                             </div>
                         </div>
 
                         {/* Chiều Cao */}
                         <div className="flex items-start gap-2">
-                            <Ruler className="w-5 h-5 text-blue-400 mt-0.5" />
+                            <Ruler className="w-5 h-5 text-blue-400" />
                             <div>
                                 <p className="text-sm text-muted-foreground">Height</p>
-                                <p className="font-medium">{person.height || "Not available"}</p>
+                                <p className="font-medium">
+                                    {person.height || "Not available"}
+                                </p>
                             </div>
                         </div>
 
                         {/* Giải thưởng */}
                         <div className="flex items-start gap-2">
-                            <Award className="w-5 h-5 text-yellow-400 mt-0.5" />
+                            <Award className="w-5 h-5 text-yellow-400" />
                             <div>
                                 <p className="text-sm text-muted-foreground">Awards</p>
-                                <p className="font-medium">{person.awards || "Not available"}</p>
+                                <p className="font-medium">
+                                    {person.awards || "Not available"}
+                                </p>
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
             <PersonKnowFor know_for={person.known_for} />
