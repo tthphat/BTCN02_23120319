@@ -50,12 +50,6 @@ export function AuthProvider({ children }) {
             throw new Error(data.message || "Register failed");
         }
 
-        setUser(data.user);
-        setToken(data.token);
-
-        localStorage.setItem("user", JSON.stringify(data.user));
-        localStorage.setItem("token", data.token);
-
         console.log("Register success", data);
     }
 
