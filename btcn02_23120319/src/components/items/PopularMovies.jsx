@@ -67,16 +67,16 @@ function PopularMovies() {
                     {movies.map(movie => (
                         <CarouselItem
                             key={movie.id}
-                            className="basis-1/3 h-full flex justify-center items-center py-4"
+                            className="basis-1/3 h-full flex justify-center items-center py-6 px-4"
                         >
                             <Card
                                 onClick={() => navigate(`/movies/${movie.id}`)}
-                                className="w-full max-w-[300px] aspect-[2/3] relative overflow-hidden border-0 rounded-xl shadow-lg cursor-pointer group transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:z-10"
+                                className="w-full max-w-[300px] aspect-[2/3] relative overflow-hidden border-0 rounded-xl shadow-lg cursor-pointer group transition-all duration-300 hover:scale-110 hover:shadow-2xl hover:z-10"
                             >
                                 <img
                                     src={movie.image}
                                     alt={movie.title}
-                                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                                    className="absolute inset-0 w-full h-full object-cover"
                                 />
 
                                 {/* Nền đen khi hover */}
