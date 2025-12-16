@@ -1,88 +1,107 @@
-import { useState, createContext, useContext } from "react";
+import { useState, useEffect, createContext, useContext } from "react";
 
-const API_URL = import.meta.env.VITE_API_URL
-const APP_TOKEN = import.meta.env.VITE_APP_TOKEN
+const API_URL = import.meta.env.VITE_API_URL;
+const APP_TOKEN = import.meta.env.VITE_APP_TOKEN;
 
 const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
-    const [user, setUser] = useState(null);
-    const [token, setToken] = useState(null);
+  const [user, setUser] = useState(null);
+  const [token, setToken] = useState(null);
 
-    const login = async (user) => {
-        const response = await fetch(`${API_URL}/users/login`, {
-            method: "POST",
-            headers: {
-                "x-app-token": APP_TOKEN,
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(user),
-        });
+  // hàm load localStrorage 
+  useEffect(() => {
+    try {
+      const storedUser = localStorage.getItem("user");
+      const storedToken = localStorage.getItem("token");
 
-        const data = await response.json();
+      if (storedUser) {
+        setUser(JSON.parse(storedUser));
+      }
+      if (storedToken) {
+        setToken(storedToken);
+      }
+    } catch (err) {
+      console.error("Failed to restore auth from localStorage", err);
+    }
+  }, []);
 
-        if (!response.ok) {
-            throw new Error(data.message || "Login failed");
-        }
+  const login = async (user) => {
+    const response = await fetch(`${API_URL}/users/login`, {
+      method: "POST",
+      headers: {
+        "x-app-token": APP_TOKEN,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(user),
+    });
 
-        setUser(data.user);
-        setToken(data.token);
+    const data = await response.json();
 
-        localStorage.setItem("user", JSON.stringify(data.user));
-        localStorage.setItem("token", data.token);
-
-        console.log("Login success", data);
+    if (!response.ok) {
+      throw new Error(data.message || "Login failed");
     }
 
-    const register = async (user) => {
-        const response = await fetch(`${API_URL}/users/register`, {
-            method: "POST",
-            headers: {
-                "x-app-token": APP_TOKEN,
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(user),
-        });
+    setUser(data.user);
+    setToken(data.token);
 
-        const data = await response.json();
+    localStorage.setItem("user", JSON.stringify(data.user));
+    localStorage.setItem("token", data.token);
 
-        if (!response.ok) {
-            throw new Error(data.message || "Register failed");
-        }
+    console.log("Login success", data);
+  };
 
-        console.log("Register success", data);
+  const register = async (user) => {
+    const response = await fetch(`${API_URL}/users/register`, {
+      method: "POST",
+      headers: {
+        "x-app-token": APP_TOKEN,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(user),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.message || "Register failed");
     }
 
-    const logout = async () => {
-        const response = await fetch(`${API_URL}/users/logout`, {
-            method: "POST",
-            headers: {
-                "x-app-token": APP_TOKEN,
-                "Authorization": `Bearer ${token}`,
-            },
-        });
+    console.log("Register success", data);
+  };
 
-        const data = await response.json();
+  const logout = async () => {
+    const response = await fetch(`${API_URL}/users/logout`, {
+      method: "POST",
+      headers: {
+        "x-app-token": APP_TOKEN,
+        Authorization: `Bearer ${token}`,
+      },
+    });
 
-        if (!response.ok) {
-            throw new Error(data.message || "Logout failed");
-        }
+    const data = await response.json();
 
-        setUser(null);
-        setToken(null);
-        localStorage.removeItem("user");
-        localStorage.removeItem("token");
+    if (!response.ok) {
+      throw new Error(data.message || "Logout failed");
+    }
 
-        console.log(data);
-    };
+    setUser(null);
+    setToken(null);
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
 
-    return (
-        <>
-            <AuthContext.Provider value={{ user, setUser, token, login, register, logout }}>
-                {children}
-            </AuthContext.Provider>
-        </>
-    );
+    console.log(data);
+  };
+
+  return (
+    <>
+      <AuthContext.Provider
+        value={{ user, setUser, token, login, register, logout }}
+      >
+        {children}
+      </AuthContext.Provider>
+    </>
+  );
 }
 
-export const useAuth = () => useContext(AuthContext);   
+export const useAuth = () => useContext(AuthContext);
