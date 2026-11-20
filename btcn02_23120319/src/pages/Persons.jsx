@@ -48,7 +48,7 @@ function Persons() {
     }
 
     return (
-        <div className="container mx-auto py-8 text-foreground">
+        <div className="container max-w-screen-xl mx-auto px-5 py-8 text-foreground">
             <div className="grid grid-cols-1 md:grid-cols-[300px_1fr] gap-8">
                 {/* Left Column: Poster */}
                 <div className="flex flex-col rounded-sm overflow-hidden">
@@ -139,3 +139,4 @@ function Persons() {
 }
 
 export default Persons;
+
