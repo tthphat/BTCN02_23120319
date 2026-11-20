@@ -1,0 +1,53 @@
+# Tên của quy trình CI (hiển thị trong tab Actions trên GitHub)
+name: CI Pipeline
+
+# Định nghĩa các sự kiện (triggers) để tự động kích hoạt workflow này
+on:
+  # Kích hoạt khi có lệnh push code lên nhánh 'main'
+  push:
+    branches: [ main ]
+  # Kích hoạt khi có một Pull Request tạo vào (hoặc cập nhật vào) nhánh 'main'
+  pull_request:
+    branches: [ main ]
+
+# Danh sách các công việc (jobs) cần thực thi
+jobs:
+  # ID định danh của công việc (có thể đặt tên tùy ý, ở đây là 'build-and-lint')
+  build-and-lint:
+    # Môi trường hệ điều hành của máy ảo runner mà GitHub cấp phát
+    runs-on: ubuntu-latest
+
+    # Thiết lập giá trị mặc định cho toàn bộ các bước trong job này
+    defaults:
+      run:
+        # Thư mục làm việc mặc định cho các lệnh run (vì package.json nằm trong thư mục con này)
+        working-directory: btcn02_23120319
+
+    # Trình tự các bước (steps) sẽ được thực hiện từ trên xuống dưới
+    steps:
+      # Bước 1: Kéo (clone) mã nguồn từ repo về máy ảo
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Bước 2: Khởi tạo và cài đặt môi trường Node.js trên máy ảo
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          # Chỉ định phiên bản Node.js muốn sử dụng
+          node-version: '22'
+          # Bật cơ chế cache cho npm để tăng tốc độ cài đặt thư viện ở các lần chạy sau
+          cache: 'npm'
+          # Đường dẫn tới package-lock.json để làm căn cứ nhận diện khi nào thư viện có thay đổi
+          cache-dependency-path: btcn02_23120319/package-lock.json
+
+      # Bước 3: Cài đặt chính xác các dependencies từ package-lock.json (dành riêng cho môi trường CI)
+      - name: Install dependencies
+        run: npm ci
+
+      # Bước 4: Chạy kiểm tra quy chuẩn và lỗi mã nguồn bằng ESLint
+      - name: Run Lint
+        run: npm run lint
+
+      # Bước 5: Thử nghiệm build dự án bằng Vite để đảm bảo không có lỗi biên dịch/import
+      - name: Run Build
+        run: npm run build
